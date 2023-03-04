@@ -15,22 +15,16 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="CPlaceHolder.h">
+    <ClInclude Include="SPoint.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CAbsManager.h">
+    <ClInclude Include="SRange.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CAbsManagerStatic.h">
+    <ClInclude Include="SRect.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CLMPadder.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="CLMAligner.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="CLMSplitter.h">
+    <ClInclude Include="SSize.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

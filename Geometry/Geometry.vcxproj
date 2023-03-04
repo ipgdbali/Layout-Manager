@@ -18,11 +18,17 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="SPoint.h" />
+    <ClInclude Include="SRange.h" />
+    <ClInclude Include="SRect.h" />
+    <ClInclude Include="SSize.h" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{fb64bd21-4c29-40b7-aaae-83b520ac595a}</ProjectGuid>
-    <RootNamespace>main</RootNamespace>
+    <ProjectGuid>{2c6f91e0-0a7a-4d5c-8b1b-e896190c3edc}</ProjectGuid>
+    <RootNamespace>Geometry</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -126,14 +132,6 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClInclude Include="CAbsManager.h" />
-    <ClInclude Include="CAbsManagerStatic.h" />
-    <ClInclude Include="CLMSplitter.h" />
-    <ClInclude Include="CLMAligner.h" />
-    <ClInclude Include="CLMPadder.h" />
-    <ClInclude Include="CPlaceHolder.h" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

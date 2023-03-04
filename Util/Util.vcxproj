@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{fb64bd21-4c29-40b7-aaae-83b520ac595a}</ProjectGuid>
-    <RootNamespace>main</RootNamespace>
+    <ProjectGuid>{29231242-239b-4217-a258-957db567cc16}</ProjectGuid>
+    <RootNamespace>Util</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -127,12 +127,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="CAbsManager.h" />
-    <ClInclude Include="CAbsManagerStatic.h" />
-    <ClInclude Include="CLMSplitter.h" />
-    <ClInclude Include="CLMAligner.h" />
-    <ClInclude Include="CLMPadder.h" />
-    <ClInclude Include="CPlaceHolder.h" />
+    <ClInclude Include="CAbsAutoReCalculate.h" />
+    <ClInclude Include="CDynamicSize.h" />
+    <ClInclude Include="CSizeable.h" />
+    <ClInclude Include="CSizeableAutoReCalculate.h" />
+    <ClInclude Include="IAutoReCalculate.h" />
+    <ClInclude Include="IReCalculate.h" />
+    <ClInclude Include="ISizeable.h" />
+    <ClInclude Include="I2DSize.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
