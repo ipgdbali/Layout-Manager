@@ -43,6 +43,14 @@ namespace ipgdlib
 				return this->m_Width;
 			}
 
+			void setAlignAndWidth(eAlignHorz align, const T& width)
+			{
+				this->m_HAlign = align;
+				this->m_Width = width;
+				this->autoReCalculate();
+			}
+
+
 			void reCalculate() override
 			{
 
