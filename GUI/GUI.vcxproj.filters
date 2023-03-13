@@ -15,23 +15,22 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ISizeable.h">
+    <ClInclude Include="CDragManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="IReCalculate.h">
+    <ClInclude Include="CWindow.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="IAutoReCalculate.h">
+    <ClInclude Include="CWndApp.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CAbsAutoReCalculate.h">
+    <ClInclude Include="CWndClass.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CSizeable.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="CSizeableAutoReCalculate.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

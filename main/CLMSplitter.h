@@ -7,12 +7,12 @@ namespace ipgdlib
 {
     namespace layout
     {
-
+        using namespace ipgdlib::util;
         enum class eSplitterKind {eFixedScaled,eScaledFixed};
 
-        template <eSplitterKind kind,typename T>
+        template <typename T,eSplitterKind kind>
         class CAbsSplitter :
-            public ipgdlib::util::CSizeableAutoReCalculate<T>
+            public CSizeableAutoReCalculate<T>
         {
             public:
                 CAbsSplitter(const T& sizeFixed,const T& space) :
@@ -41,16 +41,16 @@ namespace ipgdlib
 
         };
 
-        template <eSplitterKind kind, typename T>
+        template <typename T,eSplitterKind kind>
         class CLMHorzSplitter :
             public CAbsManagerStatic<T,2>,
-            public CAbsSplitter<kind,T>
+            public CAbsSplitter<T,kind>
         {
 
             public:
                 CLMHorzSplitter(const T& sizeFixed, const T& space,
                     std::array<CPlaceHolder<T>*,2> pPlaceHolder)
-                    : CAbsSplitter<kind,T>(sizeFixed,space), CAbsManagerStatic<T,2>(pPlaceHolder)
+                    : CAbsSplitter<T,kind>(sizeFixed,space), CAbsManagerStatic<T,2>(pPlaceHolder)
                 {
                 }
 
@@ -89,16 +89,16 @@ namespace ipgdlib
                 }
         };
 
-        template <eSplitterKind kind, typename T>
+        template <typename T,eSplitterKind kind>
         class CLMVertSplitter :
             public CAbsManagerStatic<T,2>,
-            public CAbsSplitter<kind,T>
+            public CAbsSplitter<T,kind>
         {
 
             public:
                 CLMVertSplitter(const T& sizeFixed, const T& space,
                     std::array<CPlaceHolder<T>*,2> pPlaceHolder)
-                    : CAbsSplitter<kind,T>(sizeFixed,space), CAbsManagerStatic<T,2>(pPlaceHolder)
+                    : CAbsSplitter<T,kind>(sizeFixed,space), CAbsManagerStatic<T,2>(pPlaceHolder)
                 {
                 }
 

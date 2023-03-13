@@ -20,7 +20,7 @@ namespace ipgdlib
                 CAbsManager<T,U>(),m_PlaceHolders({})
             {
                 for (size_t li = 0; li < n; li++)
-                    setChild(li, pPlaceHolder[li]);
+                    CAbsManager<T, U>::setChild(li, pPlaceHolder[li]);
             }
 
             size_t getChildCount() const override
