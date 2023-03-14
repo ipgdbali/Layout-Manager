@@ -64,12 +64,12 @@ namespace ipgdlib
         protected:
             CPlaceHolder<T>* &getChildPlaceHolderRef(size_t index) override
             {
-                return this->getChild(index).second;
+                return this->getChildRef(index).second;
             }
 
             U &getChildItemRef(size_t index)
             {
-                return this->getChild(index).first;
+                return this->getChildRef(index).first;
             }
 
         };

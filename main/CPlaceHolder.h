@@ -9,6 +9,8 @@ namespace ipgdlib
     namespace layout
     {
 
+        enum class eAffectedAxis {Horizontal,Vertical,Both};
+
         template <typename T>
         class CPlaceHolder        
         {
@@ -26,7 +28,7 @@ namespace ipgdlib
 
             bool isPointInside(const Point& p) const
             {
-                this->m_Rect.isPointInRect(p);
+                return this->m_Rect.isPointInRect(p);
             }
 
             virtual bool isManager() const
@@ -84,6 +86,8 @@ namespace ipgdlib
                 CPlaceHolder<T>(),CAbsAutoReCalculate()
             {
             }
+
+            virtual eAffectedAxis getAffectedAxis() const = 0;
 
             bool isManager() const override
             {

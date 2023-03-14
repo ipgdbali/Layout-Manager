@@ -128,7 +128,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="CAbsManager.h" />
+    <ClInclude Include="CAbsManagerDynamic.h" />
     <ClInclude Include="CAbsManagerStatic.h" />
+    <ClInclude Include="CLMDivider.h" />
     <ClInclude Include="CLMSplitter.h" />
     <ClInclude Include="CLMAligner.h" />
     <ClInclude Include="CLMPadder.h" />

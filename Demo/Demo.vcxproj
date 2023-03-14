@@ -127,12 +127,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="CMouseHandler.h" />
+    <ClInclude Include="CPanelBar.h" />
     <ClInclude Include="CMyDragManager.h" />
-    <ClInclude Include="CPanel.h" />
+    <ClInclude Include="CPanelAbs.h" />
+    <ClInclude Include="CPanelManager.h" />
+    <ClInclude Include="CPanelTool.h" />
     <ClInclude Include="IPanelManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\..\..\..\OneDrive\Pictures\close.bmp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,4 +1,5 @@
 #pragma once
+#pragma warning(disable : 4250)
 
 #include "CAbsManagerStatic.h"
 #include "../Util/CSizeableAutoReCalculate.h"
@@ -10,7 +11,7 @@ namespace ipgdlib
         using namespace ipgdlib::util;
         enum class eSplitterKind {eFixedScaled,eScaledFixed};
 
-        template <typename T,eSplitterKind kind>
+        template <typename T>
         class CAbsSplitter :
             public CSizeableAutoReCalculate<T>
         {
@@ -20,10 +21,8 @@ namespace ipgdlib
                 {
                 }
 
-                constexpr eSplitterKind getSplitterKind() const
-                {
-                    return kind;
-                }
+                virtual eAffectedAxis getAffectedAxis() const = 0;
+                virtual eSplitterKind getSplitterKind() const = 0;
 
                 const T& getSpace() const
                 {
@@ -42,17 +41,28 @@ namespace ipgdlib
         };
 
         template <typename T,eSplitterKind kind>
-        class CLMHorzSplitter :
+        class CLMSplitterHorz :
             public CAbsManagerStatic<T,2>,
-            public CAbsSplitter<T,kind>
+            public CAbsSplitter<T>
         {
 
             public:
-                CLMHorzSplitter(const T& sizeFixed, const T& space,
+                CLMSplitterHorz(const T& sizeFixed, const T& space,
                     std::array<CPlaceHolder<T>*,2> pPlaceHolder)
-                    : CAbsSplitter<T,kind>(sizeFixed,space), CAbsManagerStatic<T,2>(pPlaceHolder)
+                    : CAbsSplitter<T>(sizeFixed,space), CAbsManagerStatic<T,2>(pPlaceHolder)
                 {
                 }
+
+                eAffectedAxis getAffectedAxis() const override
+                {
+                    return eAffectedAxis::Horizontal;
+                }
+
+                eSplitterKind getSplitterKind() const override
+                {
+                    return kind;
+                }
+
 
                 void reCalculate() override
                 {
@@ -90,16 +100,26 @@ namespace ipgdlib
         };
 
         template <typename T,eSplitterKind kind>
-        class CLMVertSplitter :
+        class CLMSplitterVert :
             public CAbsManagerStatic<T,2>,
-            public CAbsSplitter<T,kind>
+            public CAbsSplitter<T>
         {
 
             public:
-                CLMVertSplitter(const T& sizeFixed, const T& space,
+                CLMSplitterVert(const T& sizeFixed, const T& space,
                     std::array<CPlaceHolder<T>*,2> pPlaceHolder)
-                    : CAbsSplitter<T,kind>(sizeFixed,space), CAbsManagerStatic<T,2>(pPlaceHolder)
+                    : CAbsSplitter<T>(sizeFixed,space), CAbsManagerStatic<T,2>(pPlaceHolder)
                 {
+                }
+
+                eAffectedAxis getAffectedAxis() const override
+                {
+                    return eAffectedAxis::Vertical;
+                }
+
+                eSplitterKind getSplitterKind() const override
+                {
+                    return kind;
                 }
 
                 void reCalculate() override
