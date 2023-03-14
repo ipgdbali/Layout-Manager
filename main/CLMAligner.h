@@ -11,14 +11,19 @@ namespace ipgdlib
 		enum class eAlignVert { Top, Middle, Bottom, Stretch };
 
 		template <typename T>
-		class CLMHorzAligner :
+		class CLMAlignerHorz :
 			public CAbsManagerStatic<T,1>
 		{
 
 		public:
-			CLMHorzAligner(eAlignHorz horzAlign, const T& width, CPlaceHolder<T>* pPlaceHolder) :
+			CLMAlignerHorz(eAlignHorz horzAlign, const T& width, CPlaceHolder<T>* pPlaceHolder) :
 				CAbsManagerStatic<T, 1>({ pPlaceHolder }), m_HAlign(horzAlign), m_Width(width)
 			{
+			}
+
+			eAffectedAxis getAffectedAxis() const override
+			{
+				return eAffectedAxis::Horizontal;
 			}
 
 			void setHAlign(eAlignHorz align)
@@ -109,14 +114,19 @@ namespace ipgdlib
 
 
 		template <typename T>
-		class CLMVertAligner :
+		class CLMAlignerVert :
 			public CAbsManagerStatic<T,1>
 		{
 
 		public:
-			CLMVertAligner(eAlignVert vertAlign, const T& height, CPlaceHolder<T>* pPlaceHolder) :
+			CLMAlignerVert(eAlignVert vertAlign, const T& height, CPlaceHolder<T>* pPlaceHolder) :
 				CAbsManagerStatic<T, 1>({ pPlaceHolder }), m_VAlign(vertAlign), m_Height(height)
 			{
+			}
+
+			eAffectedAxis getAffectedAxis() const override
+			{
+				return eAffectedAxis::Vertical;
 			}
 
 			void setVAlign(eAlignVert align)

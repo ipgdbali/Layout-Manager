@@ -28,26 +28,26 @@ namespace LayoutManagerTest
 
 			TEST_METHOD(class_CLMHorzALigner)
 			{
-				CLMHorzAligner<int>(eAlignHorz::Stretch, 10, new CPlaceHolder<int>());
+				CLMAlignerHorz<int>(eAlignHorz::Stretch, 10, new CPlaceHolder<int>());
 			}
 
 			TEST_METHOD(class_CLMVertALigner)
 			{
-				CLMVertAligner<int>(eAlignVert::Stretch, 10, new CPlaceHolder<int>());
+				CLMAlignerVert<int>(eAlignVert::Stretch, 10, new CPlaceHolder<int>());
 			}
 
-			TEST_METHOD(class_CLMHorzSplitter)
+			TEST_METHOD(class_CLMSplitterHorz)
 			{
-				CLMHorzSplitter<eSplitterKind::eFixedScaled, int>(100, 5,
+				CLMSplitterHorz<int,eSplitterKind::eFixedScaled>(100, 5,
 					{
 						new CPlaceHolder<int>(),
 						new CPlaceHolder<int>()
 					});
 			}
 
-			TEST_METHOD(class_CLMVertSplitter)
+			TEST_METHOD(class_CLMSplitterVert)
 			{
-				CLMVertSplitter<eSplitterKind::eFixedScaled, int>(100, 5,
+				CLMSplitterVert<int, eSplitterKind::eFixedScaled>(100, 5,
 					{
 						new CPlaceHolder<int>(),
 						new CPlaceHolder<int>()

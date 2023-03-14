@@ -3,6 +3,7 @@
 #include "SPoint.h"
 #include "SSize.h"
 #include "SRange.h"
+#include <Windows.h>
 
 namespace ipgdlib
 {
@@ -46,6 +47,12 @@ namespace ipgdlib
 			bool operator == (const SRect<T>& r) const
 			{
 				return this->left == r.left && this->top == r.top && this->right == r.right && this->bottom == r.bottom;
+			}
+
+			operator RECT() const
+			{
+				RECT r = { (LONG)this->left,(LONG)this->top,(LONG)this->right,(LONG)this->bottom };
+				return r;
 			}
 
 

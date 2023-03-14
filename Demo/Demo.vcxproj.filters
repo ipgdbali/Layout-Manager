@@ -18,10 +18,22 @@
     <ClInclude Include="CMyDragManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CPanel.h">
+    <ClInclude Include="CPanelAbs.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="IPanelManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CPanelManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CPanelBar.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CPanelTool.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CMouseHandler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -29,5 +41,10 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\..\..\..\OneDrive\Pictures\close.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

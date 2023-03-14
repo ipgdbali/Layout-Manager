@@ -20,6 +20,12 @@ namespace ipgdlib
 			{
 			}
 
+			eAffectedAxis getAffectedAxis() const override
+			{
+				return eAffectedAxis::Both;
+			}
+
+
 			void setPadding(const Rect& padding)
 			{
 				this->m_Padding = padding;
