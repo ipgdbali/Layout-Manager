@@ -7,22 +7,22 @@ namespace ipgdlib
 	namespace layout
 	{
 
-		template <typename T, typename U = void>
+		template <typename T, typename U = void,typename V = void>
 		class CAbsManagerDynamic :
-			public CAbsManager<T, U>
+			public CAbsManager<T, U, V>
 		{
 
         public:
-			using child_type = CAbsManager<T, U>::child_type;
+			using child_type = CAbsManager<T, U,V>::child_type;
 
             CAbsManagerDynamic(const std::vector<child_type>& pPlaceHolders)
-                : CAbsManager<T, U>(), m_Childs()
+                : CAbsManager<T,U,V>(), m_Childs()
             {
 
                 m_Childs.resize(pPlaceHolders.size());
 
                 for (size_t li = 0; li < pPlaceHolders.size(); li++)
-                    CAbsManager<T, U>::setChild(li, pPlaceHolders[li]);
+                    CAbsManager<T, U,V>::setChild(li, pPlaceHolders[li]);
 
             }
 

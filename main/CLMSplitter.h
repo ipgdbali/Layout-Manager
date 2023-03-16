@@ -40,16 +40,16 @@ namespace ipgdlib
 
         };
 
-        template <typename T,eSplitterKind kind>
+        template <typename T,eSplitterKind kind,typename V = void>
         class CLMSplitterHorz :
-            public CAbsManagerStatic<T,2>,
+            public CAbsManagerStatic<T,2,void,V>,
             public CAbsSplitter<T>
         {
 
             public:
                 CLMSplitterHorz(const T& sizeFixed, const T& space,
                     std::array<CPlaceHolder<T>*,2> pPlaceHolder)
-                    : CAbsSplitter<T>(sizeFixed,space), CAbsManagerStatic<T,2>(pPlaceHolder)
+                    : CAbsSplitter<T>(sizeFixed,space), CAbsManagerStatic<T,2,void,V>(pPlaceHolder)
                 {
                 }
 
@@ -99,16 +99,16 @@ namespace ipgdlib
                 }
         };
 
-        template <typename T,eSplitterKind kind>
+        template <typename T,eSplitterKind kind, typename V = void>
         class CLMSplitterVert :
-            public CAbsManagerStatic<T,2>,
+            public CAbsManagerStatic<T,2,void,V>,
             public CAbsSplitter<T>
         {
 
             public:
                 CLMSplitterVert(const T& sizeFixed, const T& space,
                     std::array<CPlaceHolder<T>*,2> pPlaceHolder)
-                    : CAbsSplitter<T>(sizeFixed,space), CAbsManagerStatic<T,2>(pPlaceHolder)
+                    : CAbsSplitter<T>(sizeFixed,space), CAbsManagerStatic<T,2,void,V>(pPlaceHolder)
                 {
                 }
 

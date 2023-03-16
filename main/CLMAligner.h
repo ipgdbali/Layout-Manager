@@ -10,14 +10,14 @@ namespace ipgdlib
 		enum class eAlignHorz { Left, Middle, Right, Stretch };
 		enum class eAlignVert { Top, Middle, Bottom, Stretch };
 
-		template <typename T>
+		template <typename T,typename V>
 		class CLMAlignerHorz :
-			public CAbsManagerStatic<T,1>
+			public CAbsManagerStatic<T,1,void,V>
 		{
 
 		public:
 			CLMAlignerHorz(eAlignHorz horzAlign, const T& width, CPlaceHolder<T>* pPlaceHolder) :
-				CAbsManagerStatic<T, 1>({ pPlaceHolder }), m_HAlign(horzAlign), m_Width(width)
+				CAbsManagerStatic<T, 1,void,V>({ pPlaceHolder }), m_HAlign(horzAlign), m_Width(width)
 			{
 			}
 
@@ -113,14 +113,14 @@ namespace ipgdlib
 		};
 
 
-		template <typename T>
+		template <typename T,typename V>
 		class CLMAlignerVert :
-			public CAbsManagerStatic<T,1>
+			public CAbsManagerStatic<T,1,void,V>
 		{
 
 		public:
 			CLMAlignerVert(eAlignVert vertAlign, const T& height, CPlaceHolder<T>* pPlaceHolder) :
-				CAbsManagerStatic<T, 1>({ pPlaceHolder }), m_VAlign(vertAlign), m_Height(height)
+				CAbsManagerStatic<T, 1,void,V>({ pPlaceHolder }), m_VAlign(vertAlign), m_Height(height)
 			{
 			}
 

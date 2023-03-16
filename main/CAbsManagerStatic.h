@@ -8,19 +8,19 @@ namespace ipgdlib
     namespace layout
     {
 
-        template <typename T,size_t n,typename U = void>
+        template <typename T,size_t n,typename U = void,typename V=void>
         class CAbsManagerStatic :
-            public CAbsManager<T,U>
+            public CAbsManager<T,U,V>
         {
 
         public:
-            using child_type = CAbsManager<T, U>::child_type;
+            using child_type = CAbsManager<T, U, V>::child_type;
 
             CAbsManagerStatic(const std::array<child_type, n> &pPlaceHolder) :
-                CAbsManager<T,U>(),m_Childs({})
+                CAbsManager<T,U,V>(),m_Childs({})
             {
                 for (size_t li = 0; li < n; li++)
-                    CAbsManager<T, U>::setChild(li, pPlaceHolder[li]);
+                    CAbsManager<T, U, V>::setChild(li, pPlaceHolder[li]);
             }
 
             size_t getChildCount() const override

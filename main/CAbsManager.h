@@ -8,14 +8,14 @@ namespace ipgdlib
     namespace layout
     {
 
-        template <typename T,typename U>
+        template <typename T,typename U,typename V>
         class CAbsManagerSelector :
-            public CPlaceHolder<T>::CAbsBaseManager
+            public CPlaceHolder<T,V>::CAbsBaseManager
         {
         public:
             using child_type = U;
             CAbsManagerSelector() :
-                CPlaceHolder<T>::CAbsBaseManager()
+                CPlaceHolder<T, V>::CAbsBaseManager()
             {
             }
 
@@ -28,19 +28,19 @@ namespace ipgdlib
         private:
         };
 
-        template <typename T,typename U>
+        template <typename T,typename U = void, typename V = void>
         class CAbsManager :
-            public CAbsManagerSelector<T, std::pair<U, CPlaceHolder<T>*> >
+            public CAbsManagerSelector<T, std::pair<U, CPlaceHolder<T>*>,V>
         {
         public:
             using child_type = std::pair<U, CPlaceHolder<T>*>;
 
             CAbsManager() :
-                CAbsManagerSelector < T, child_type>()
+                CAbsManagerSelector < T, child_type,V>()
             {
             }
 
-            CPlaceHolder<T>* const &getChildPlaceHolder(size_t index) const override
+            CPlaceHolder<T,V>* const &getChildPlaceHolder(size_t index) const override
             {
                 return this->getChild(index).second;
             }
@@ -62,7 +62,7 @@ namespace ipgdlib
             }
 
         protected:
-            CPlaceHolder<T>* &getChildPlaceHolderRef(size_t index) override
+            CPlaceHolder<T,V>* &getChildPlaceHolderRef(size_t index) override
             {
                 return this->getChildRef(index).second;
             }
@@ -74,14 +74,14 @@ namespace ipgdlib
 
         };
 
-        template <typename T>
-        class CAbsManager<T,void> :
-            public CAbsManagerSelector < T, CPlaceHolder<T>* >
+        template <typename T,typename V>
+        class CAbsManager<T,void,V> :
+            public CAbsManagerSelector < T, CPlaceHolder<T>*,V>
         {
             public:
-                using child_type = CPlaceHolder<T>*;
+                using child_type = CPlaceHolder<T,V>*;
 
-                CPlaceHolder<T>* const &getChildPlaceHolder(size_t index) const override
+                CPlaceHolder<T,V>* const &getChildPlaceHolder(size_t index) const override
                 {
                     return this->getChild(index);
                 }
@@ -92,7 +92,7 @@ namespace ipgdlib
                 }
 
         protected:
-                CPlaceHolder<T>* &getChildPlaceHolderRef(size_t index) override
+                CPlaceHolder<T,V>* &getChildPlaceHolderRef(size_t index) override
                 {
                     return this->getChildRef(index);
                 }
@@ -100,5 +100,3 @@ namespace ipgdlib
 
     }
 }
-
-

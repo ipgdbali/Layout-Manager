@@ -7,16 +7,16 @@ namespace ipgdlib
 	namespace layout
 	{
 
-		template <typename T>
+		template <typename T,typename V = void>
 		class CLMDividerHorz :
-			public CAbsManagerDynamic<T,size_t>
+			public CAbsManagerDynamic<T,size_t,V>
 		{
 
 			public:
-				using child_type = CAbsManagerDynamic<T, size_t>::child_type;
+				using child_type = CAbsManagerDynamic<T, size_t,V>::child_type;
 
 				CLMDividerHorz(const T& spacing, std::vector< child_type > v)
-					: m_Spacing(spacing), CAbsManagerDynamic<T, size_t>(v)
+					: m_Spacing(spacing), CAbsManagerDynamic<T, size_t,V>(v)
 				{
 				}
 
@@ -63,16 +63,16 @@ namespace ipgdlib
 
 		};
 
-		template <typename T>
+		template <typename T,typename V = void>
 		class CLMDividerVert :
-			public CAbsManagerDynamic<T, size_t>
+			public CAbsManagerDynamic<T, size_t,V>
 		{
 
 		public:
-			using child_type = CAbsManagerDynamic<T, size_t>::child_type;
+			using child_type = CAbsManagerDynamic<T, size_t,V>::child_type;
 
 			CLMDividerVert(const T& spacing, std::vector< child_type > v)
-				: m_Spacing(spacing), CAbsManagerDynamic<T, size_t>(v)
+				: m_Spacing(spacing), CAbsManagerDynamic<T, size_t,V>(v)
 			{
 			}
 

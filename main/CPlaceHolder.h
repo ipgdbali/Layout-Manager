@@ -2,6 +2,7 @@
 
 #include "./../Geometry/SRect.h"
 #include "../Util/CAbsAutoReCalculate.h"
+#include "../Util/CCustomData.h"
 #include <vector>
 
 namespace ipgdlib
@@ -11,8 +12,9 @@ namespace ipgdlib
 
         enum class eAffectedAxis {Horizontal,Vertical,Both};
 
-        template <typename T>
-        class CPlaceHolder        
+        template <typename T,typename TItem=void>
+        class CPlaceHolder : 
+            public CCustomData<TItem>
         {
 
         public:
@@ -66,15 +68,15 @@ namespace ipgdlib
             {
                 this->m_Parent = parent;
             }
+            
 
         private:
             Rect m_Rect;
             CAbsBaseManager *m_Parent;
-
         };
 
-        template <typename T>
-        class CPlaceHolder<T>::CAbsBaseManager :
+        template <typename T,typename TItem>
+        class CPlaceHolder<T,TItem>::CAbsBaseManager :
             public CPlaceHolder<T>,
             public ipgdlib::util::CAbsAutoReCalculate
         {
