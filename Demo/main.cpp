@@ -43,12 +43,13 @@ static LRESULT Wndproc(
 			WNDCLASSEX wc;
 			GetClassInfoEx(GetModuleHandle(NULL), CLASS_NAME, &wc);
 			CPanelTool<int>::Default = new CPanelManager<int>(25,{ BS_SOLID ,RGB(200,200,200)});
+			
 			pRoot = new CLMSplitterVert<int, eSplitterKind::eFixedScaled>(30, 5,
 				{
 					new CPanelBar<int>(),
 					new CLMSplitterVert<int,eSplitterKind::eScaledFixed>(30,5,
 						{
-							new CLMPadder<int>({5,0,5,0},
+							new CLMPadder<int,bool>(false,{5,0,5,0},
 								new CLMSplitterHorz<int,eSplitterKind::eFixedScaled>(250,5,
 									{
 										new CLMSplitterVert<int,eSplitterKind::eFixedScaled>(250,5,

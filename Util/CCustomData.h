@@ -3,7 +3,9 @@
 template <typename T>
 class CCustomData {
 	public:
+
 		CCustomData() = default;
+
 		CCustomData(const T& customData) 
 			: m_CustomData(customData)
 		{
@@ -40,6 +42,6 @@ class CCustomData {
 };
 
 template <>
-class CCustomData<void>
+class CCustomData<void> 
 {
 };

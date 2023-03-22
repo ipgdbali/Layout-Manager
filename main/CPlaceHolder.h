@@ -28,6 +28,24 @@ namespace ipgdlib
             {
             }
 
+            template <
+                typename _TItem = TItem,
+                typename std::enable_if< !std::is_same<_TItem,void>::value ,bool >::type = true
+            >
+            CPlaceHolder(const _TItem& customData)
+                : CCustomData<_TItem>(customData)
+            {
+            }
+
+            template <
+                typename _TItem = TItem,
+                typename std::enable_if< !std::is_same<_TItem, void>::value, bool >::type = true
+            >
+            CPlaceHolder(_TItem && customData)
+                : CCustomData<_TItem>(std::move(customData))
+            {
+            }
+
             bool isPointInside(const Point& p) const
             {
                 return this->m_Rect.isPointInRect(p);
@@ -77,15 +95,37 @@ namespace ipgdlib
 
         template <typename T,typename TItem>
         class CPlaceHolder<T,TItem>::CAbsBaseManager :
-            public CPlaceHolder<T>,
+            public CPlaceHolder<T,TItem>,
             public ipgdlib::util::CAbsAutoReCalculate
         {
         public:
-            using Rect = CPlaceHolder<T>::Rect;
-            using Point = CPlaceHolder<T>::Point;
+            using Rect = CPlaceHolder<T, TItem>::Rect;
+            using Point = CPlaceHolder<T, TItem>::Point;
 
+            template <
+                typename _TItem = TItem,
+                typename std::enable_if< std::is_same<_TItem, void>::value, bool >::type = true
+            >
             CAbsBaseManager() :
-                CPlaceHolder<T>(),CAbsAutoReCalculate()
+                CPlaceHolder<T, TItem>(),CAbsAutoReCalculate()
+            {
+            }
+
+            template <
+                typename _TItem = TItem,
+                typename std::enable_if< !std::is_same<_TItem, void>::value, bool >::type = true
+            >
+            CAbsBaseManager(const _TItem& customData)
+                : CPlaceHolder<T,_TItem>(customData)
+            {
+            }
+
+            template <
+                typename _TItem = TItem,
+                typename std::enable_if< !std::is_same<_TItem, void>::value, bool >::type = true
+            >
+            CAbsBaseManager(_TItem&& customData)
+                : CPlaceHolder<T, _TItem>(std::move(customData))
             {
             }
 
@@ -107,13 +147,13 @@ namespace ipgdlib
 
             virtual size_t getChildCount() const = 0;
 
-            virtual CPlaceHolder<T> *const &getChildPlaceHolder(size_t index) const = 0;
+            virtual CPlaceHolder<T, TItem> *const &getChildPlaceHolder(size_t index) const = 0;
             
-            virtual void setChildPlaceHolder(size_t index, CPlaceHolder<T>* const pPlaceHolder)
+            virtual void setChildPlaceHolder(size_t index, CPlaceHolder<T, TItem>* const pPlaceHolder)
             {
                 if (pPlaceHolder)
                 {
-                    CPlaceHolder<T>* &pInternal = this->getChildPlaceHolderRef(index);
+                    CPlaceHolder<T, TItem>* &pInternal = this->getChildPlaceHolderRef(index);
                     if (pInternal != nullptr)
                     {
                         clearChildParent(pInternal);
@@ -124,7 +164,7 @@ namespace ipgdlib
                 }
             }
 
-            bool setChildPlaceHolders(const std::vector<CPlaceHolder<T>*> &pPlaceHolders)
+            bool setChildPlaceHolders(const std::vector<CPlaceHolder<T, TItem>*> &pPlaceHolders)
             {
                 if (pPlaceHolders->size() == this->getChildCount())
                 {
@@ -137,24 +177,25 @@ namespace ipgdlib
             }
 
         protected:
-            virtual CPlaceHolder<T>* &getChildPlaceHolderRef(size_t index) = 0;
+            virtual CPlaceHolder<T, TItem>* &getChildPlaceHolderRef(size_t index) = 0;
 
             void onChangeRect(Rect& oRect, const Rect& nRect) override
             {
-                CPlaceHolder<T>::onChangeRect(oRect, nRect);
+                CPlaceHolder<T, TItem>::onChangeRect(oRect, nRect);
                 this->reCalculate();
             }
 
-        private:
-            void clearChildParent(CPlaceHolder<T>* pPlaceHolder)
+            void clearChildParent(CPlaceHolder<T, TItem>* pPlaceHolder)
             {
                 pPlaceHolder->setParent(nullptr);
             }
 
-            void setChildParent(CPlaceHolder<T>* pPlaceHolder)
+            void setChildParent(CPlaceHolder<T, TItem>* pPlaceHolder)
             {
                 pPlaceHolder->setParent(this);
             }
+
+        private:
 
         };
 

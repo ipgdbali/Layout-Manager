@@ -15,8 +15,21 @@ namespace ipgdlib
 		public:
 			using Rect = typename CPlaceHolder<T>::Rect;
 
-			CLMPadder(const Rect& padding, CPlaceHolder<T>* pPlaceHolder = nullptr) :
-				CAbsManagerStatic<T, 1,void, V>({ pPlaceHolder }), m_Padding(padding)
+			template <
+				typename _V = V,
+				typename std::enable_if< std::is_same<_V, void>::value, bool >::type = true
+			>
+			CLMPadder(const Rect& padding, CPlaceHolder<T>* const pPlaceHolder) :
+				CAbsManagerStatic<T, 1, void, V>({ pPlaceHolder }), m_Padding(padding)
+			{
+			}
+
+			template <
+				typename _V = V,
+				typename std::enable_if< !std::is_same<_V, void>::value, bool >::type = true
+			>
+			CLMPadder(const _V& customData,const Rect& padding, CPlaceHolder<T>* const pPlaceHolder) :
+				CAbsManagerStatic<T, 1, void, V>(customData,{ pPlaceHolder }), m_Padding(padding)
 			{
 			}
 
@@ -24,7 +37,6 @@ namespace ipgdlib
 			{
 				return eAffectedAxis::Both;
 			}
-
 
 			void setPadding(const Rect& padding)
 			{
@@ -43,8 +55,10 @@ namespace ipgdlib
 			}
 
 		protected:
+
 		private:
 			Rect m_Padding;
+
 		};
 
 

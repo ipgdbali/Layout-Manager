@@ -8,7 +8,12 @@ namespace ipgdlib
     namespace layout
     {
 
-        template <typename T,size_t n,typename U = void,typename V=void>
+        template <
+            typename T,
+            size_t n,
+            typename U = void,
+            typename V = void
+        >
         class CAbsManagerStatic :
             public CAbsManager<T,U,V>
         {
@@ -16,11 +21,70 @@ namespace ipgdlib
         public:
             using child_type = CAbsManager<T, U, V>::child_type;
 
-            CAbsManagerStatic(const std::array<child_type, n> &pPlaceHolder) :
-                CAbsManager<T,U,V>(),m_Childs({})
+            template <
+                typename _V = V,
+                typename std::enable_if< std::is_same<_V, void>::value, bool >::type = true
+            >
+            CAbsManagerStatic(const std::array<child_type, n> & childs) :
+                CAbsManager<T, U, V>(), m_Childs(childs)
             {
                 for (size_t li = 0; li < n; li++)
-                    CAbsManager<T, U, V>::setChild(li, pPlaceHolder[li]);
+                    CAbsManager<T, U, V>::setChildParent(this->getChildPlaceHolder(li));
+            }
+
+            template <
+                typename _V = V,
+                typename std::enable_if< std::is_same<_V, void>::value, bool >::type = true
+            >
+            CAbsManagerStatic(std::array<child_type, n> && childs) :
+                CAbsManager<T, U, V>(), m_Childs(std::move(childs))
+            {
+                for (size_t li = 0; li < n; li++)
+                    CAbsManager<T, U, V>::setChildParent(this->getChildPlaceHolder(li));
+            }
+
+            template <
+                typename _V = V,
+                typename std::enable_if< !std::is_same<_V, void>::value, bool >::type = true
+            >
+            CAbsManagerStatic(const _V& customData, const std::array<child_type, n>& childs)
+                : CAbsManager<T, U, V>(customData), m_Childs(childs)
+            {
+                for (size_t li = 0; li < n; li++)
+                    CAbsManager<T, U, V>::setChildParent(this->getChildPlaceHolder(li));
+            }
+
+            template <
+                typename _V = V,
+                typename std::enable_if< !std::is_same<_V, void>::value, bool >::type = true
+            >
+            CAbsManagerStatic(const _V& customData, std::array<child_type, n> && childs)
+                : CAbsManager<T, U, V>(customData), m_Childs(std::move(childs))
+            {
+                for (size_t li = 0; li < n; li++)
+                    CAbsManager<T, U, V>::setChildParent(this->getChildPlaceHolder(li));
+            }
+
+            template <
+                typename _V = V,
+                typename std::enable_if< !std::is_same<_V, void>::value, bool >::type = true
+            >
+            CAbsManagerStatic(_V && customData, const std::array<child_type, n> & childs)
+                : CAbsManager<T, U, V>(std::move(customData)), m_Childs(childs)
+            {
+                for (size_t li = 0; li < n; li++)
+                    CAbsManager<T, U, V>::setChildParent(this->getChildPlaceHolder(li));
+            }
+
+            template <
+                typename _V = V,
+                typename std::enable_if< !std::is_same<_V, void>::value, bool >::type = true
+            >
+            CAbsManagerStatic(_V && customData, std::array<child_type, n> && childs)
+                : CAbsManager<T, U, V>(std::move(customData)), m_Childs(std::move(childs))
+            {
+                for (size_t li = 0; li < n; li++)
+                    CAbsManager<T, U, V>::setChildParent(this->getChildPlaceHolder(li));
             }
 
             size_t getChildCount() const override

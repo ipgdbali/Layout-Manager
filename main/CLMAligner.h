@@ -10,7 +10,7 @@ namespace ipgdlib
 		enum class eAlignHorz { Left, Middle, Right, Stretch };
 		enum class eAlignVert { Top, Middle, Bottom, Stretch };
 
-		template <typename T,typename V>
+		template <typename T,typename V = void>
 		class CLMAlignerHorz :
 			public CAbsManagerStatic<T,1,void,V>
 		{
@@ -113,7 +113,7 @@ namespace ipgdlib
 		};
 
 
-		template <typename T,typename V>
+		template <typename T,typename V = void>
 		class CLMAlignerVert :
 			public CAbsManagerStatic<T,1,void,V>
 		{

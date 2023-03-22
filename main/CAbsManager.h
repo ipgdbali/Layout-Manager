@@ -8,14 +8,41 @@ namespace ipgdlib
     namespace layout
     {
 
-        template <typename T,typename U,typename V>
+        template <
+            typename T,
+            typename U, // child_type
+            typename V // CPlaceHolder,V
+        >
         class CAbsManagerSelector :
             public CPlaceHolder<T,V>::CAbsBaseManager
         {
         public:
             using child_type = U;
-            CAbsManagerSelector() :
-                CPlaceHolder<T, V>::CAbsBaseManager()
+
+            template <
+                typename _V = V,
+                typename std::enable_if< std::is_same<_V, void>::value, bool >::type = true
+            >
+            CAbsManagerSelector()
+                : CPlaceHolder<T, _V>::CAbsBaseManager()
+            {
+            }
+
+            template <
+                typename _V = V,
+                typename std::enable_if< !std::is_same<_V, void>::value, bool >::type = true
+            >
+            CAbsManagerSelector(const _V& customData)
+                : CPlaceHolder<T, _V>::CAbsBaseManager(customData)
+            {
+            }
+
+            template <
+                typename _V = V,
+                typename std::enable_if< !std::is_same<_V, void>::value, bool >::type = true
+            >
+            CAbsManagerSelector(_V && customData)
+                : CPlaceHolder<T, _V>::CAbsBaseManager(std::move(customData))
             {
             }
 
@@ -30,13 +57,35 @@ namespace ipgdlib
 
         template <typename T,typename U = void, typename V = void>
         class CAbsManager :
-            public CAbsManagerSelector<T, std::pair<U, CPlaceHolder<T>*>,V>
+            public CAbsManagerSelector<T, std::pair<U, CPlaceHolder<T,V>*>,V>
         {
         public:
-            using child_type = std::pair<U, CPlaceHolder<T>*>;
+            using child_type = std::pair<U, CPlaceHolder<T,V>*>;
 
+            template <
+                typename _V = V,
+                typename std::enable_if< std::is_same<_V, void>::value, bool >::type = true
+            >
             CAbsManager() :
                 CAbsManagerSelector < T, child_type,V>()
+            {
+            }
+
+            template <
+                typename _V = V,
+                typename std::enable_if< !std::is_same<_V, void>::value, bool >::type = true
+            >
+            CAbsManager(const _V& customData)
+                : CAbsManagerSelector<T, std::pair<U, CPlaceHolder<T,V>*>, V>(customData)
+            {
+            }
+
+            template <
+                typename _V = V,
+                typename std::enable_if< !std::is_same<_V, void>::value, bool >::type = true
+            >
+            CAbsManager(_V && customData)
+                : CAbsManagerSelector<T, std::pair<U, CPlaceHolder<T>*>, V>(std::move(customData))
             {
             }
 
@@ -76,10 +125,37 @@ namespace ipgdlib
 
         template <typename T,typename V>
         class CAbsManager<T,void,V> :
-            public CAbsManagerSelector < T, CPlaceHolder<T>*,V>
+            public CAbsManagerSelector < T, CPlaceHolder<T,V>*,V>
         {
             public:
                 using child_type = CPlaceHolder<T,V>*;
+
+                template <
+                    typename _V = V,
+                    typename std::enable_if< std::is_same<_V, void>::value, bool >::type = true
+                >
+                CAbsManager() :
+                    CAbsManagerSelector < T, child_type, V>()
+                {
+                }
+
+                template <
+                    typename _V = V,
+                    typename std::enable_if< !std::is_same<_V, void>::value, bool >::type = true
+                >
+                CAbsManager(const _V& customData)
+                    : CAbsManagerSelector<T, child_type, V>(customData)
+                {
+                }
+
+                template <
+                    typename _V = V,
+                    typename std::enable_if< !std::is_same<_V, void>::value, bool >::type = true
+                >
+                CAbsManager(_V && customData)
+                    : CAbsManagerSelector<T, child_type, V>(std::move(customData))
+                {
+                }
 
                 CPlaceHolder<T,V>* const &getChildPlaceHolder(size_t index) const override
                 {
