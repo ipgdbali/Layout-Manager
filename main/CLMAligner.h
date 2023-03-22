@@ -15,101 +15,101 @@ namespace ipgdlib
 			public CAbsManagerStatic<T,1,void,V>
 		{
 
-		public:
-			CLMAlignerHorz(eAlignHorz horzAlign, const T& width, CPlaceHolder<T>* pPlaceHolder) :
-				CAbsManagerStatic<T, 1,void,V>({ pPlaceHolder }), m_HAlign(horzAlign), m_Width(width)
-			{
-			}
-
-			eAffectedAxis getAffectedAxis() const override
-			{
-				return eAffectedAxis::Horizontal;
-			}
-
-			void setHAlign(eAlignHorz align)
-			{
-				this->m_HAlign = align;
-				this->autoReCalculate();
-			}
-
-			eAlignHorz getHAlign() const
-			{
-				return this->m_HAlign;
-			}
-
-			void setWidth(const T& width)
-			{
-				this->m_Width = width;
-				this->autoReCalculate();
-			}
-
-			const T& getWidth() const
-			{
-				return this->m_Width;
-			}
-
-			void setAlignAndWidth(eAlignHorz align, const T& width)
-			{
-				this->m_HAlign = align;
-				this->m_Width = width;
-				this->autoReCalculate();
-			}
-
-
-			void reCalculate() override
-			{
-
-				switch (m_HAlign)
+			public:
+				CLMAlignerHorz(eAlignHorz horzAlign, const T& width, CAbsBasePlaceHolder<T>* pPlaceHolder) :
+					CAbsManagerStatic<T, 1,void,V>({ pPlaceHolder }), m_HAlign(horzAlign), m_Width(width)
 				{
-				case eAlignHorz::Left:
+				}
+
+				eAffectedAxis getAffectedAxis() const override
 				{
-					this->getChildPlaceHolder(0)->changeRect(
-						{
-							this->getRect().left,
-							this->getRect().top,
-							this->getRect().left + this->m_Width - 1,
-							this->getRect().bottom,
+					return eAffectedAxis::Horizontal;
+				}
 
-						});
-				}break;
-
-				case eAlignHorz::Middle:
+				void setHAlign(eAlignHorz align)
 				{
-					T start = this->getRect().left + (this->getRect().width() - this->m_Width) / 2 - 1;
-					this->getChildPlaceHolder(0)->changeRect(
-						{
-							start,
-							this->getRect().top,
-							start + this->m_Width - 1,
-							this->getRect().bottom,
+					this->m_HAlign = align;
+					this->autoReCalculate();
+				}
 
-						});
-				}break;
-
-				case eAlignHorz::Right:
+				eAlignHorz getHAlign() const
 				{
-					this->getChildPlaceHolder(0)->changeRect(
-						{
-							this->getRect().right - (this->m_Width - 1),
-							this->getRect().top,
-							this->getRect().right,
-							this->getRect().bottom,
+					return this->m_HAlign;
+				}
 
-						});
-				}break;
-
-				case eAlignHorz::Stretch:
+				void setWidth(const T& width)
 				{
-					this->getChildPlaceHolder(0)->changeRect(this->getRect());
-				}break;
+					this->m_Width = width;
+					this->autoReCalculate();
+				}
+
+				const T& getWidth() const
+				{
+					return this->m_Width;
+				}
+
+				void setAlignAndWidth(eAlignHorz align, const T& width)
+				{
+					this->m_HAlign = align;
+					this->m_Width = width;
+					this->autoReCalculate();
+				}
+
+
+				void reCalculate() override
+				{
+
+					switch (m_HAlign)
+					{
+					case eAlignHorz::Left:
+					{
+						this->getChildPlaceHolder(0)->changeRect(
+							{
+								this->getRect().left,
+								this->getRect().top,
+								this->getRect().left + this->m_Width - 1,
+								this->getRect().bottom,
+
+							});
+					}break;
+
+					case eAlignHorz::Middle:
+					{
+						T start = this->getRect().left + (this->getRect().width() - this->m_Width) / 2 - 1;
+						this->getChildPlaceHolder(0)->changeRect(
+							{
+								start,
+								this->getRect().top,
+								start + this->m_Width - 1,
+								this->getRect().bottom,
+
+							});
+					}break;
+
+					case eAlignHorz::Right:
+					{
+						this->getChildPlaceHolder(0)->changeRect(
+							{
+								this->getRect().right - (this->m_Width - 1),
+								this->getRect().top,
+								this->getRect().right,
+								this->getRect().bottom,
+
+							});
+					}break;
+
+					case eAlignHorz::Stretch:
+					{
+						this->getChildPlaceHolder(0)->changeRect(this->getRect());
+					}break;
+
+					}
 
 				}
 
-			}
-
-		private:
-			eAlignHorz m_HAlign;
-			T m_Width;
+			private:
+				eAlignHorz m_HAlign;
+				T m_Width;
 		};
 
 
@@ -119,7 +119,7 @@ namespace ipgdlib
 		{
 
 		public:
-			CLMAlignerVert(eAlignVert vertAlign, const T& height, CPlaceHolder<T>* pPlaceHolder) :
+			CLMAlignerVert(eAlignVert vertAlign, const T& height, CAbsBasePlaceHolder<T>* pPlaceHolder) :
 				CAbsManagerStatic<T, 1,void,V>({ pPlaceHolder }), m_VAlign(vertAlign), m_Height(height)
 			{
 			}

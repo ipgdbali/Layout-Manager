@@ -32,7 +32,7 @@ namespace LayoutManagerTest
 
 			TEST_METHOD(class_CLMPadder)
 			{
-				CLMPadder<int> root({ 5,5,5,5 }, new CPlaceHolder<int>());
+				CLMPadder<int> root({ 5,5,5,5 }, new CPlaceHolder<int,int>(10));
 
 				root.changeRect({ 0,0,99,99 });
 				Assert::AreEqual<ipgdlib::geometry::SRect<int>>
@@ -40,24 +40,30 @@ namespace LayoutManagerTest
 				Assert::AreEqual<size_t>(root.getChildCount(), 1);
 				Assert::AreEqual<bool>(root.getAutoReCalculate(), true);
 				Assert::AreEqual<size_t>(root.getChildIndexFromPoint({ 20,20 }), 0);
+				Assert::AreEqual<bool>(root.getChildPlaceHolder(0)->hasCustomData(),true);
+				Assert::AreEqual<int>(
+					dynamic_cast<CPlaceHolder<int,int>*>(
+						root.getChildPlaceHolder(0)
+					)->getCustomData(),
+					10);
 			}
 
 			TEST_METHOD(class_CLMHorzALigner)
 			{
-				CLMAlignerHorz<int>(eAlignHorz::Stretch, 10, new CPlaceHolder<int>());
+				CLMAlignerHorz<int>(eAlignHorz::Stretch, 10, new CPlaceHolder<int,int>(10));
 			}
 
 			TEST_METHOD(class_CLMVertALigner)
 			{
-				CLMAlignerVert<int>(eAlignVert::Stretch, 10, new CPlaceHolder<int>());
+				CLMAlignerVert<int>(eAlignVert::Stretch, 10, new CPlaceHolder<int,int>(10));
 			}
 
 			TEST_METHOD(class_CLMSplitterHorz)
 			{
 				CLMSplitterHorz<int,eSplitterKind::eFixedScaled>(100, 5,
 					{
-						new CPlaceHolder<int>(),
-						new CPlaceHolder<int>()
+						new CPlaceHolder<int,int>(10),
+						new CPlaceHolder<int,int>(10)
 					});
 			}
 
@@ -65,8 +71,8 @@ namespace LayoutManagerTest
 			{
 				CLMSplitterVert<int, eSplitterKind::eFixedScaled>(100, 5,
 					{
-						new CPlaceHolder<int>(),
-						new CPlaceHolder<int>()
+						new CPlaceHolder<int,int>(10),
+						new CPlaceHolder<int,int>(10)
 					});
 			}
 
