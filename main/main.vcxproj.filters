@@ -39,5 +39,14 @@
     <ClInclude Include="CAbsManagerDynamic.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="CAbsBasePlaceHolder.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CAbsBaseManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="todo.txt" />
   </ItemGroup>
 </Project>

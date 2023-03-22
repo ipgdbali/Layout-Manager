@@ -1,203 +1,58 @@
 #pragma once
 
-#include "./../Geometry/SRect.h"
-#include "../Util/CAbsAutoReCalculate.h"
-#include "../Util/CCustomData.h"
-#include <vector>
+#include "CAbsBasePlaceHolder.h"
 
 namespace ipgdlib
 {
     namespace layout
     {
 
-        enum class eAffectedAxis {Horizontal,Vertical,Both};
-
         template <typename T,typename TItem=void>
         class CPlaceHolder : 
+            public CAbsBasePlaceHolder<T>,
             public CCustomData<TItem>
         {
 
-        public:
-            using Rect = ipgdlib::geometry::SRect<T>;
-            using Point = ipgdlib::geometry::SPoint<T>;
+            public:
+                using Rect = CAbsBasePlaceHolder<T>::Rect;
+                using Point = CAbsBasePlaceHolder<T>::Point;
 
-            class CAbsBaseManager;
-
-            CPlaceHolder() :
-                m_Rect({ 0 }), m_Parent(nullptr)
-            {
-            }
-
-            template <
-                typename _TItem = TItem,
-                typename std::enable_if< !std::is_same<_TItem,void>::value ,bool >::type = true
-            >
-            CPlaceHolder(const _TItem& customData)
-                : CCustomData<_TItem>(customData)
-            {
-            }
-
-            template <
-                typename _TItem = TItem,
-                typename std::enable_if< !std::is_same<_TItem, void>::value, bool >::type = true
-            >
-            CPlaceHolder(_TItem && customData)
-                : CCustomData<_TItem>(std::move(customData))
-            {
-            }
-
-            bool isPointInside(const Point& p) const
-            {
-                return this->m_Rect.isPointInRect(p);
-            }
-
-            virtual bool isManager() const
-            {
-                return false;
-            }
-
-            const Rect &getRect() const
-            {
-                return this->m_Rect;
-            }
-
-            void changeRect(const Rect& r)
-            {
-                this->onChangeRect(this->m_Rect, r);
-            }
-
-            bool hasParent() const
-            {
-                return this->m_Parent != nullptr;
-            }
-
-            CAbsBaseManager* const &getParent() const
-            {
-                return this->m_Parent;
-            }
-
-        protected:
-            virtual void onChangeRect(Rect& r, const Rect& nr)
-            {
-                r = nr;
-            }
-
-            void setParent(CAbsBaseManager *const parent)
-            {
-                this->m_Parent = parent;
-            }
-            
-
-        private:
-            Rect m_Rect;
-            CAbsBaseManager *m_Parent;
-        };
-
-        template <typename T,typename TItem>
-        class CPlaceHolder<T,TItem>::CAbsBaseManager :
-            public CPlaceHolder<T,TItem>,
-            public ipgdlib::util::CAbsAutoReCalculate
-        {
-        public:
-            using Rect = CPlaceHolder<T, TItem>::Rect;
-            using Point = CPlaceHolder<T, TItem>::Point;
-
-            template <
-                typename _TItem = TItem,
-                typename std::enable_if< std::is_same<_TItem, void>::value, bool >::type = true
-            >
-            CAbsBaseManager() :
-                CPlaceHolder<T, TItem>(),CAbsAutoReCalculate()
-            {
-            }
-
-            template <
-                typename _TItem = TItem,
-                typename std::enable_if< !std::is_same<_TItem, void>::value, bool >::type = true
-            >
-            CAbsBaseManager(const _TItem& customData)
-                : CPlaceHolder<T,_TItem>(customData)
-            {
-            }
-
-            template <
-                typename _TItem = TItem,
-                typename std::enable_if< !std::is_same<_TItem, void>::value, bool >::type = true
-            >
-            CAbsBaseManager(_TItem&& customData)
-                : CPlaceHolder<T, _TItem>(std::move(customData))
-            {
-            }
-
-            virtual eAffectedAxis getAffectedAxis() const = 0;
-
-            bool isManager() const override
-            {
-                return true;
-            }
-
-            size_t getChildIndexFromPoint(const Point& p) const
-            {
-                for (size_t li = 0; li < this->getChildCount(); li++)
-                    if (this->getChildPlaceHolder(li)->getRect().isPointInRect(p))
-                        return li;
-
-                return (size_t)-1;
-            }
-
-            virtual size_t getChildCount() const = 0;
-
-            virtual CPlaceHolder<T, TItem> *const &getChildPlaceHolder(size_t index) const = 0;
-            
-            virtual void setChildPlaceHolder(size_t index, CPlaceHolder<T, TItem>* const pPlaceHolder)
-            {
-                if (pPlaceHolder)
+                template <
+                    typename _TItem = TItem,
+                    typename std::enable_if< std::is_same<_TItem, void>::value, bool >::type = true
+                >
+                CPlaceHolder() :
+                    CAbsBasePlaceHolder<T>(),CCustomData()
                 {
-                    CPlaceHolder<T, TItem>* &pInternal = this->getChildPlaceHolderRef(index);
-                    if (pInternal != nullptr)
-                    {
-                        clearChildParent(pInternal);
-                        pPlaceHolder->changeRect(pInternal->getRect());
-                    }
-                    pInternal = pPlaceHolder;
-                    setChildParent(pInternal);
                 }
-            }
 
-            bool setChildPlaceHolders(const std::vector<CPlaceHolder<T, TItem>*> &pPlaceHolders)
-            {
-                if (pPlaceHolders->size() == this->getChildCount())
+                template <
+                    typename _TItem = TItem,
+                    typename std::enable_if< !std::is_same<_TItem, void>::value, bool >::type = true
+                >
+                CPlaceHolder(const _TItem& customData)
+                    : CAbsBasePlaceHolder<T>(),CCustomData<_TItem>(customData)
                 {
-                    for (size_t li = 0; li < this->getChildCount(); li++)
-                        this->setChildPlaceHolder(li, pPlaceHolders[li]);
-                    return true;
                 }
-                else
+
+                template <
+                    typename _TItem = TItem,
+                    typename std::enable_if< !std::is_same<_TItem, void>::value, bool >::type = true
+                >
+                CPlaceHolder(_TItem && customData)
+                    : CAbsBasePlaceHolder<T>(), CCustomData<_TItem>(std::move(customData))
+                {
+                }
+
+                bool isManager() const override final
+                {
                     return false;
-            }
+                }
 
-        protected:
-            virtual CPlaceHolder<T, TItem>* &getChildPlaceHolderRef(size_t index) = 0;
-
-            void onChangeRect(Rect& oRect, const Rect& nRect) override
-            {
-                CPlaceHolder<T, TItem>::onChangeRect(oRect, nRect);
-                this->reCalculate();
-            }
-
-            void clearChildParent(CPlaceHolder<T, TItem>* pPlaceHolder)
-            {
-                pPlaceHolder->setParent(nullptr);
-            }
-
-            void setChildParent(CPlaceHolder<T, TItem>* pPlaceHolder)
-            {
-                pPlaceHolder->setParent(this);
-            }
-
-        private:
 
         };
+
+
 
     };
 };

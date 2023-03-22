@@ -13,13 +13,14 @@ namespace ipgdlib
 			public CAbsManagerStatic<T,1,void,V>
 		{
 		public:
-			using Rect = typename CPlaceHolder<T>::Rect;
+			using Rect = typename CAbsBasePlaceHolder<T>::Rect;
+			using Point = typename CAbsBasePlaceHolder<T>::Point;
 
 			template <
 				typename _V = V,
 				typename std::enable_if< std::is_same<_V, void>::value, bool >::type = true
 			>
-			CLMPadder(const Rect& padding, CPlaceHolder<T>* const pPlaceHolder) :
+			CLMPadder(const Rect& padding, CAbsBasePlaceHolder<T>* const pPlaceHolder) :
 				CAbsManagerStatic<T, 1, void, V>({ pPlaceHolder }), m_Padding(padding)
 			{
 			}
@@ -28,7 +29,7 @@ namespace ipgdlib
 				typename _V = V,
 				typename std::enable_if< !std::is_same<_V, void>::value, bool >::type = true
 			>
-			CLMPadder(const _V& customData,const Rect& padding, CPlaceHolder<T>* const pPlaceHolder) :
+			CLMPadder(const _V& customData,const Rect& padding, CAbsBasePlaceHolder<T>* const pPlaceHolder) :
 				CAbsManagerStatic<T, 1, void, V>(customData,{ pPlaceHolder }), m_Padding(padding)
 			{
 			}

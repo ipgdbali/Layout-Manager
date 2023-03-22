@@ -48,7 +48,7 @@ namespace ipgdlib
 
             public:
                 CLMSplitterHorz(const T& sizeFixed, const T& space,
-                    std::array<CPlaceHolder<T>*,2> pPlaceHolder)
+                    std::array<CAbsBasePlaceHolder<T>*,2> pPlaceHolder)
                     : CAbsSplitter<T>(sizeFixed,space), CAbsManagerStatic<T,2,void,V>(pPlaceHolder)
                 {
                 }
@@ -107,7 +107,7 @@ namespace ipgdlib
 
             public:
                 CLMSplitterVert(const T& sizeFixed, const T& space,
-                    std::array<CPlaceHolder<T>*,2> pPlaceHolder)
+                    std::array<CAbsBasePlaceHolder<T>*,2> pPlaceHolder)
                     : CAbsSplitter<T>(sizeFixed,space), CAbsManagerStatic<T,2,void,V>(pPlaceHolder)
                 {
                 }

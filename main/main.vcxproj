@@ -127,6 +127,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="CAbsBaseManager.h" />
+    <ClInclude Include="CAbsBasePlaceHolder.h" />
     <ClInclude Include="CAbsManager.h" />
     <ClInclude Include="CAbsManagerDynamic.h" />
     <ClInclude Include="CAbsManagerStatic.h" />
@@ -135,6 +137,9 @@
     <ClInclude Include="CLMAligner.h" />
     <ClInclude Include="CLMPadder.h" />
     <ClInclude Include="CPlaceHolder.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="todo.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

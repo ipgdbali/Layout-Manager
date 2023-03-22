@@ -1,9 +1,16 @@
 #pragma once
 
-template <typename T>
-class CCustomData {
+struct ICustomData
+{
 	public:
+		virtual bool hasCustomData() const = 0;
+};
 
+template <typename T>
+class CCustomData :
+	virtual public ICustomData
+{
+	public:
 		CCustomData() = default;
 
 		CCustomData(const T& customData) 
@@ -14,6 +21,11 @@ class CCustomData {
 		CCustomData(T&& customData)
 			: m_CustomData(std::move(customData))
 		{
+		}
+
+		bool hasCustomData() const override
+		{
+			return true;
 		}
 
 		const T &getCustomData() const
@@ -42,6 +54,14 @@ class CCustomData {
 };
 
 template <>
-class CCustomData<void> 
+class CCustomData<void> :
+	virtual public ICustomData
 {
+
+public:
+	bool hasCustomData() const override
+	{
+		return false;
+	}
+
 };
