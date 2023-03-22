@@ -40,16 +40,17 @@ namespace ipgdlib
 
         };
 
-        template <typename T,eSplitterKind kind,typename V = void>
+        template <typename T,eSplitterKind kind,typename TCustomData = void>
         class CLMSplitterHorz :
-            public CAbsManagerStatic<T,2,void,V>,
+            public CAbsManagerStatic<T,2,TCustomData, void>,
             public CAbsSplitter<T>
         {
 
             public:
                 CLMSplitterHorz(const T& sizeFixed, const T& space,
-                    std::array<CAbsBasePlaceHolder<T>*,2> pPlaceHolder)
-                    : CAbsSplitter<T>(sizeFixed,space), CAbsManagerStatic<T,2,void,V>(pPlaceHolder)
+                    std::array<CAbsBasePlaceHolder<T>*,2> pPlaceHolder) : 
+                        CAbsSplitter<T>(sizeFixed,space), 
+                        CAbsManagerStatic<T,2,TCustomData, void>(pPlaceHolder)
                 {
                 }
 
@@ -99,16 +100,16 @@ namespace ipgdlib
                 }
         };
 
-        template <typename T,eSplitterKind kind, typename V = void>
+        template <typename T,eSplitterKind kind, typename TCustomData = void>
         class CLMSplitterVert :
-            public CAbsManagerStatic<T,2,void,V>,
+            public CAbsManagerStatic<T,2,void,TCustomData>,
             public CAbsSplitter<T>
         {
 
             public:
                 CLMSplitterVert(const T& sizeFixed, const T& space,
                     std::array<CAbsBasePlaceHolder<T>*,2> pPlaceHolder)
-                    : CAbsSplitter<T>(sizeFixed,space), CAbsManagerStatic<T,2,void,V>(pPlaceHolder)
+                    : CAbsSplitter<T>(sizeFixed,space), CAbsManagerStatic<T,2,void,TCustomData>(pPlaceHolder)
                 {
                 }
 

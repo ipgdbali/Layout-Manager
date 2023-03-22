@@ -7,16 +7,16 @@ namespace ipgdlib
 	namespace layout
 	{
 
-		template <typename T,typename V = void>
+		template <typename T,typename TCustomData = void>
 		class CLMDividerHorz :
-			public CAbsManagerDynamic<T,size_t,V>
+			public CAbsManagerDynamic<T,TCustomData, size_t>
 		{
 
 			public:
-				using child_type = CAbsManagerDynamic<T, size_t,V>::child_type;
+				using child_item_type = CAbsManagerDynamic<T,TCustomData, size_t>::child_item_type;
 
-				CLMDividerHorz(const T& spacing, std::vector< child_type > v)
-					: m_Spacing(spacing), CAbsManagerDynamic<T, size_t,V>(v)
+				CLMDividerHorz(const T& spacing, std::vector< child_item_type > v)
+					: m_Spacing(spacing), CAbsManagerDynamic<T,TCustomData, size_t>(v)
 				{
 				}
 
@@ -63,16 +63,16 @@ namespace ipgdlib
 
 		};
 
-		template <typename T,typename V = void>
+		template <typename T,typename TCustomData = void>
 		class CLMDividerVert :
-			public CAbsManagerDynamic<T, size_t,V>
+			public CAbsManagerDynamic<T, size_t,TCustomData>
 		{
 
 		public:
-			using child_type = CAbsManagerDynamic<T, size_t,V>::child_type;
+			using child_item_type = CAbsManagerDynamic<T, size_t,TCustomData>::child_item_type;
 
-			CLMDividerVert(const T& spacing, std::vector< child_type > v)
-				: m_Spacing(spacing), CAbsManagerDynamic<T, size_t,V>(v)
+			CLMDividerVert(const T& spacing, std::vector< child_item_type > v)
+				: m_Spacing(spacing), CAbsManagerDynamic<T, size_t,TCustomData>(v)
 			{
 			}
 

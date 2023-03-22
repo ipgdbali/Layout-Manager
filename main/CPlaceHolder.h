@@ -7,10 +7,10 @@ namespace ipgdlib
     namespace layout
     {
 
-        template <typename T,typename TItem=void>
+        template <typename T,typename TCustomData=void>
         class CPlaceHolder : 
             public CAbsBasePlaceHolder<T>,
-            public CCustomData<TItem>
+            public CCustomData<TCustomData>
         {
 
             public:
@@ -18,29 +18,29 @@ namespace ipgdlib
                 using Point = CAbsBasePlaceHolder<T>::Point;
 
                 template <
-                    typename _TItem = TItem,
-                    typename std::enable_if< std::is_same<_TItem, void>::value, bool >::type = true
+                    typename _TCustomData = TCustomData,
+                    typename std::enable_if< std::is_same<_TCustomData, void>::value, bool >::type = true
                 >
                 CPlaceHolder() :
-                    CAbsBasePlaceHolder<T>(),CCustomData<_TItem>()
+                    CAbsBasePlaceHolder<T>(),CCustomData<_TCustomData>()
                 {
                 }
 
                 template <
-                    typename _TItem = TItem,
-                    typename std::enable_if< !std::is_same<_TItem, void>::value, bool >::type = true
+                    typename _TCustomData = TCustomData,
+                    typename std::enable_if< !std::is_same<_TCustomData, void>::value, bool >::type = true
                 >
-                CPlaceHolder(const _TItem& customData)
-                    : CAbsBasePlaceHolder<T>(),CCustomData<_TItem>(customData)
+                CPlaceHolder(const _TCustomData& customData)
+                    : CAbsBasePlaceHolder<T>(),CCustomData<_TCustomData>(customData)
                 {
                 }
 
                 template <
-                    typename _TItem = TItem,
-                    typename std::enable_if< !std::is_same<_TItem, void>::value, bool >::type = true
+                    typename _TCustomData = TCustomData,
+                    typename std::enable_if< !std::is_same<_TCustomData, void>::value, bool >::type = true
                 >
-                CPlaceHolder(_TItem && customData)
-                    : CAbsBasePlaceHolder<T>(), CCustomData<_TItem>(std::move(customData))
+                CPlaceHolder(_TCustomData && customData)
+                    : CAbsBasePlaceHolder<T>(), CCustomData<_TCustomData>(std::move(customData))
                 {
                 }
 

@@ -11,83 +11,95 @@ namespace ipgdlib
 
         template <
             typename T,
-            typename U, // child_type
-            typename V
+            typename TCustomData, // Custom Data 
+            typename TChildItem  // child_item_type
         >
         class CAbsManagerTS : // TS -> template Specialization
             public CAbsBasePlaceHolder<T>::CAbsBaseManager,
-            public CCustomData<V>
+            public CCustomData<TCustomData>
         {
             public:
-                using child_type = U;
+                using child_item_type = TChildItem;
 
                 template <
-                    typename _V = V,
-                    typename std::enable_if< std::is_same<_V, void>::value, bool >::type = true
+                    typename _TCustomData = TCustomData,
+                    typename std::enable_if< 
+                        std::is_same<_TCustomData, void>::value, 
+                        bool 
+                    >::type = true
                 >
-                CAbsManagerTS()
-                    : CAbsBasePlaceHolder<T>::CAbsBaseManager(), CCustomData<V>()
+                CAbsManagerTS() : 
+                    CAbsBasePlaceHolder<T>::CAbsBaseManager(), 
+                    CCustomData<TCustomData>()
                 {
                 }
 
                 template <
-                    typename _V = V,
-                    typename std::enable_if< !std::is_same<_V, void>::value, bool >::type = true
+                    typename _TCustomData = TCustomData,
+                    typename std::enable_if< 
+                        !std::is_same<_TCustomData, void>::value,
+                        bool 
+                    >::type = true
                 >
-                CAbsManagerTS(const _V& customData)
-                    : CAbsBasePlaceHolder<T>::CAbsBaseManager(), CCustomData<V>(customData)
+                CAbsManagerTS(const _TCustomData & customData) :
+                    CAbsBasePlaceHolder<T>::CAbsBaseManager(), 
+                    CCustomData<TCustomData>(customData)
                 {
                 }
 
                 template <
-                    typename _V = V,
-                    typename std::enable_if< !std::is_same<_V, void>::value, bool >::type = true
+                    typename _TCustomData = TCustomData,
+                    typename std::enable_if< 
+                        !std::is_same<_TCustomData, void>::value,
+                        bool 
+                    >::type = true
                 >
-                CAbsManagerTS(_V && customData)
-                    : CAbsBasePlaceHolder<T>::CAbsBaseManager(), CCustomData<V>(std::move(customData))
+                CAbsManagerTS(_TCustomData && customData) : 
+                    CAbsBasePlaceHolder<T>::CAbsBaseManager(), 
+                    CCustomData<TChildItem>(std::move(customData))
                 {
                 }
 
-                virtual child_type const &getChild(size_t index) const = 0;
-                virtual void setChild(size_t index, const child_type &child) = 0;
+                virtual child_item_type const &getChild(size_t index) const = 0;
+                virtual void setChild(size_t index, const child_item_type &child) = 0;
 
             protected:
-                virtual child_type &getChildRef(size_t index) = 0;
+                virtual child_item_type &getChildRef(size_t index) = 0;
 
             private:
         };
 
-        template <typename T,typename U = void, typename V = void>
+        template <typename T,typename TCustomData = void, typename TChildItem = void>
         class CAbsManager :
-            public CAbsManagerTS<T, std::pair<U, CAbsBasePlaceHolder<T>*>,V>
+            public CAbsManagerTS<T, TCustomData, std::pair<TChildItem, CAbsBasePlaceHolder<T>*>>
         {
         public:
-            using child_type = std::pair<U, CAbsBasePlaceHolder<T>*>;
+            using child_item_type = std::pair<TChildItem, CAbsBasePlaceHolder<T>*>;
 
             template <
-                typename _V = V,
-                typename std::enable_if< std::is_same<_V, void>::value, bool >::type = true
+                typename _TCustomData = TCustomData,
+                typename std::enable_if< std::is_same<_TCustomData, void>::value, bool >::type = true
             >
             CAbsManager() :
-                CAbsManagerTS < T, child_type,V>()
+                CAbsManagerTS < T,TCustomData, child_item_type>()
             {
             }
 
             template <
-                typename _V = V,
-                typename std::enable_if< !std::is_same<_V, void>::value, bool >::type = true
+                typename _TCustomData = TCustomData,
+                typename std::enable_if< !std::is_same<_TCustomData, void>::value, bool >::type = true
             >
-            CAbsManager(const _V& customData)
-                : CAbsManagerTS<T, std::pair<U, CAbsBasePlaceHolder<T>* >, V>(customData)
+            CAbsManager(const _TCustomData& customData)
+                : CAbsManagerTS<T, std::pair<TCustomData, CAbsBasePlaceHolder<T>* >, TCustomData>(customData)
             {
             }
 
             template <
-                typename _V = V,
-                typename std::enable_if< !std::is_same<_V, void>::value, bool >::type = true
+                typename _TCustomData = TCustomData,
+                typename std::enable_if< !std::is_same<_TCustomData, void>::value, bool >::type = true
             >
-            CAbsManager(_V && customData)
-                : CAbsManagerTS<T, std::pair<U, CPlaceHolder<T>*>, V>(std::move(customData))
+            CAbsManager(_TCustomData && customData)
+                : CAbsManagerTS<T, std::pair<TCustomData, CPlaceHolder<T>*>, TCustomData>(std::move(customData))
             {
             }
 
@@ -96,18 +108,18 @@ namespace ipgdlib
                 return this->getChild(index).second;
             }
 
-            U const& getChildItem(size_t index) const
+            TChildItem const& getChildItem(size_t index) const
             {
                 return this->getChild(index).first;
             }
 
-            void setChild(size_t index,const child_type &child) override
+            void setChild(size_t index,const child_item_type &child) override
             {
                 this->setChildPlaceHolder(index, child.second);
                 this->setChildItem(index, child.first);
             }
 
-            virtual void setChildItem(size_t index,const U &item)
+            virtual void setChildItem(size_t index,const TChildItem &item)
             {
                 this->getChildItemRef(index) = item;
             }
@@ -118,44 +130,44 @@ namespace ipgdlib
                 return this->getChildRef(index).second;
             }
 
-            U &getChildItemRef(size_t index)
+            TChildItem &getChildItemRef(size_t index)
             {
                 return this->getChildRef(index).first;
             }
 
         };
 
-        template <typename T,typename V>
-        class CAbsManager<T,void,V> :
-            public CAbsManagerTS < T, CAbsBasePlaceHolder<T>*,V>
+        template <typename T,typename TCustomData>
+        class CAbsManager<T,TCustomData, void> :
+            public CAbsManagerTS < T,TCustomData, CAbsBasePlaceHolder<T>*>
         {
             public:
-                using child_type = CAbsBasePlaceHolder<T>*;
+                using child_item_type = CAbsBasePlaceHolder<T>*;
 
                 template <
-                    typename _V = V,
-                    typename std::enable_if< std::is_same<_V, void>::value, bool >::type = true
+                    typename _TCustomData = TCustomData,
+                    typename std::enable_if< std::is_same<_TCustomData, void>::value, bool >::type = true
                 >
                 CAbsManager() :
-                    CAbsManagerTS < T, child_type, V>()
+                    CAbsManagerTS < T, TCustomData, child_item_type>()
                 {
                 }
 
                 template <
-                    typename _V = V,
-                    typename std::enable_if< !std::is_same<_V, void>::value, bool >::type = true
+                    typename _TCustomData = TCustomData,
+                    typename std::enable_if< !std::is_same<_TCustomData, void>::value, bool >::type = true
                 >
-                CAbsManager(const _V& customData)
-                    : CAbsManagerTS<T, child_type, V>(customData)
+                CAbsManager(const _TCustomData& customData)
+                    : CAbsManagerTS<T, TCustomData, child_item_type>(customData)
                 {
                 }
 
                 template <
-                    typename _V = V,
-                    typename std::enable_if< !std::is_same<_V, void>::value, bool >::type = true
+                    typename _TCustomData = TCustomData,
+                    typename std::enable_if< !std::is_same<_TCustomData, void>::value, bool >::type = true
                 >
-                CAbsManager(_V && customData)
-                    : CAbsManagerTS<T, child_type, V>(std::move(customData))
+                CAbsManager(_TCustomData && customData)
+                    : CAbsManagerTS<T, child_item_type, TCustomData>(std::move(customData))
                 {
                 }
 
@@ -164,7 +176,7 @@ namespace ipgdlib
                     return this->getChild(index);
                 }
 
-                void setChild(size_t index, const child_type &child) override
+                void setChild(size_t index, const child_item_type &child) override
                 {
                     this->setChildPlaceHolder(index, child);
                 }

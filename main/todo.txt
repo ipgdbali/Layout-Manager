@@ -1,1 +1,2 @@
-CAbsManager T,U,V -> ubah agar U TItem,V ->child_type
+- CAbsManager T,U,V -> ubah agar U TItem,V ->child_item_type
+- Adds Constructor move type and copy type ?

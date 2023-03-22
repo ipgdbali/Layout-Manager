@@ -10,14 +10,14 @@ namespace ipgdlib
 		enum class eAlignHorz { Left, Middle, Right, Stretch };
 		enum class eAlignVert { Top, Middle, Bottom, Stretch };
 
-		template <typename T,typename V = void>
+		template <typename T,typename TCustomData = void>
 		class CLMAlignerHorz :
-			public CAbsManagerStatic<T,1,void,V>
+			public CAbsManagerStatic<T,1,TCustomData, void>
 		{
 
 			public:
 				CLMAlignerHorz(eAlignHorz horzAlign, const T& width, CAbsBasePlaceHolder<T>* pPlaceHolder) :
-					CAbsManagerStatic<T, 1,void,V>({ pPlaceHolder }), m_HAlign(horzAlign), m_Width(width)
+					CAbsManagerStatic<T, 1,TCustomData, void>({ pPlaceHolder }), m_HAlign(horzAlign), m_Width(width)
 				{
 				}
 
@@ -113,14 +113,14 @@ namespace ipgdlib
 		};
 
 
-		template <typename T,typename V = void>
+		template <typename T,typename TCustomData = void>
 		class CLMAlignerVert :
-			public CAbsManagerStatic<T,1,void,V>
+			public CAbsManagerStatic<T,1,void,TCustomData>
 		{
 
 		public:
 			CLMAlignerVert(eAlignVert vertAlign, const T& height, CAbsBasePlaceHolder<T>* pPlaceHolder) :
-				CAbsManagerStatic<T, 1,void,V>({ pPlaceHolder }), m_VAlign(vertAlign), m_Height(height)
+				CAbsManagerStatic<T, 1,void,TCustomData>({ pPlaceHolder }), m_TCustomDataAlign(vertAlign), m_Height(height)
 			{
 			}
 
@@ -129,15 +129,15 @@ namespace ipgdlib
 				return eAffectedAxis::Vertical;
 			}
 
-			void setVAlign(eAlignVert align)
+			void setTCustomDataAlign(eAlignVert align)
 			{
-				this->m_VAlign = align;
+				this->m_TCustomDataAlign = align;
 				this->autoReCalculate();
 			}
 
-			eAlignVert getVAlign() const
+			eAlignVert getTCustomDataAlign() const
 			{
-				return this->m_VAlign;
+				return this->m_TCustomDataAlign;
 			}
 
 			void setHeight(const T& height)
@@ -153,7 +153,7 @@ namespace ipgdlib
 
 			void setAlignAndHeight(eAlignVert align, const T& height)
 			{
-				this->m_VAlign = align;
+				this->m_TCustomDataAlign = align;
 				this->m_Height = height;
 				this->autoReCalculate();
 			}
@@ -161,7 +161,7 @@ namespace ipgdlib
 			void reCalculate() override
 			{
 
-				switch (m_VAlign)
+				switch (m_TCustomDataAlign)
 				{
 
 				case eAlignVert::Top:
@@ -209,7 +209,7 @@ namespace ipgdlib
 			}
 
 		private:
-			eAlignVert m_VAlign;
+			eAlignVert m_TCustomDataAlign;
 			T m_Height;
 
 		};

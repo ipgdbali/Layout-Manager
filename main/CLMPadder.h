@@ -8,29 +8,29 @@ namespace ipgdlib
 	namespace layout
 	{
 
-		template <typename T,typename V = void>
+		template <typename T,typename TCustomData = void>
 		class CLMPadder :
-			public CAbsManagerStatic<T,1,void,V>
+			public CAbsManagerStatic<T,1,TCustomData, void>
 		{
 		public:
 			using Rect = typename CAbsBasePlaceHolder<T>::Rect;
 			using Point = typename CAbsBasePlaceHolder<T>::Point;
 
 			template <
-				typename _V = V,
+				typename _V = TCustomData,
 				typename std::enable_if< std::is_same<_V, void>::value, bool >::type = true
 			>
 			CLMPadder(const Rect& padding, CAbsBasePlaceHolder<T>* const pPlaceHolder) :
-				CAbsManagerStatic<T, 1, void, V>({ pPlaceHolder }), m_Padding(padding)
+				CAbsManagerStatic<T, 1,TCustomData,void>({ pPlaceHolder }), m_Padding(padding)
 			{
 			}
 
 			template <
-				typename _V = V,
+				typename _V = TCustomData,
 				typename std::enable_if< !std::is_same<_V, void>::value, bool >::type = true
 			>
 			CLMPadder(const _V& customData,const Rect& padding, CAbsBasePlaceHolder<T>* const pPlaceHolder) :
-				CAbsManagerStatic<T, 1, void, V>(customData,{ pPlaceHolder }), m_Padding(padding)
+				CAbsManagerStatic<T, 1,TCustomData,void>(customData,{ pPlaceHolder }), m_Padding(padding)
 			{
 			}
 
