@@ -59,6 +59,10 @@ class CCustomData<void> :
 {
 
 public:
+	CCustomData()
+	{
+	}
+
 	bool hasCustomData() const override
 	{
 		return false;

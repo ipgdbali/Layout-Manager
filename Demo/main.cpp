@@ -23,7 +23,7 @@ using namespace ipgdlib::os::window;
 
 #define CLASS_NAME _T("My Class")
 
-CPlaceHolder<int>::CAbsBaseManager * pRoot;
+CAbsBasePlaceHolder<int>::CAbsBaseManager * pRoot;
 CMouseHandler<int> *pMouseHandler;
 IPanelManager<int> *CPanelTool<int>::Default = nullptr;
 

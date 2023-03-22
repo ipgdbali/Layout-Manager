@@ -22,7 +22,7 @@ namespace ipgdlib
                     typename std::enable_if< std::is_same<_TItem, void>::value, bool >::type = true
                 >
                 CPlaceHolder() :
-                    CAbsBasePlaceHolder<T>(),CCustomData()
+                    CAbsBasePlaceHolder<T>(),CCustomData<_TItem>()
                 {
                 }
 

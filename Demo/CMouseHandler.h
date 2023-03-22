@@ -5,12 +5,12 @@
 
 using namespace ipgdlib::layout;
 
-void draw(CPlaceHolder<int>* pPlaceHolder, HDC hdc)
+void draw(CAbsBasePlaceHolder<int>* pPlaceHolder, HDC hdc)
 {
 	if (pPlaceHolder->isManager())
 	{
-		CPlaceHolder<int>::CAbsBaseManager* manager =
-			dynamic_cast<CPlaceHolder<int>::CAbsBaseManager*>(pPlaceHolder);
+		CAbsBasePlaceHolder<int>::CAbsBaseManager* manager =
+			dynamic_cast<CAbsBasePlaceHolder<int>::CAbsBaseManager*>(pPlaceHolder);
 		for (int li = 0; li < manager->getChildCount(); li++)
 			draw(manager->getChildPlaceHolder(li), hdc);
 	}
@@ -26,7 +26,7 @@ class CMouseHandler
 {
 public:
 
-	CMouseHandler(HWND hWnd, HBRUSH bkgd,typename CPlaceHolder<T>::CAbsBaseManager* pRoot)
+	CMouseHandler(HWND hWnd, HBRUSH bkgd,typename CAbsBasePlaceHolder<T>::CAbsBaseManager* pRoot)
 		: m_hWnd(hWnd),m_pRoot(pRoot),m_X(0),m_Y(0),m_Background(bkgd),m_pDragPlaceHolder(nullptr)
 	{
 	}
@@ -36,14 +36,14 @@ public:
 		return this->m_pDragPlaceHolder != nullptr;
 	}
 
-	CPlaceHolder<T> *getLButtonDownPlaceHolder() const
+	CAbsBasePlaceHolder<T> *getLButtonDownPlaceHolder() const
 	{
 		return this->m_pDragPlaceHolder;
 	}
 
 	void onLButtonDown(T x, T y)
 	{
-		CPlaceHolder<T>* tmp = findPlaceHolder(x, y);
+		CAbsBasePlaceHolder<T>* tmp = findPlaceHolder(x, y);
 		this->setLButtonDown(tmp,x,y);
 
 		this->m_pDragPlaceHolder = tmp;
@@ -60,7 +60,7 @@ public:
 	{
 		if (this->isLButtonDown())
 		{
-			CPlaceHolder<T>* tmp = this->getLButtonDownPlaceHolder();
+			CAbsBasePlaceHolder<T>* tmp = this->getLButtonDownPlaceHolder();
 			if (tmp->isManager())
 			{
 				if (dynamic_cast<CAbsSplitter<T>*>(tmp) != nullptr)
@@ -106,7 +106,7 @@ public:
 	{
 		if (this->isLButtonDown())
 		{
-			CPlaceHolder<T>* tmp = this->getLButtonDownPlaceHolder();
+			CAbsBasePlaceHolder<T>* tmp = this->getLButtonDownPlaceHolder();
 			if (tmp->isManager())
 			{
 			}
@@ -118,7 +118,7 @@ public:
 	}
 
 protected:
-	void setLButtonDown(CPlaceHolder<T> *pPlaceHolder,T x,T y)
+	void setLButtonDown(CAbsBasePlaceHolder<T> *pPlaceHolder,T x,T y)
 	{
 		this->m_pDragPlaceHolder = pPlaceHolder;
 		this->m_X = x;
@@ -130,9 +130,9 @@ protected:
 		this->m_pDragPlaceHolder = nullptr;
 	}
 
-	typename CPlaceHolder<T>* findPlaceHolder(T x, T y)
+	typename CAbsBasePlaceHolder<T>* findPlaceHolder(T x, T y)
 	{
-		CPlaceHolder<T>* tmp = m_pRoot;
+		CAbsBasePlaceHolder<T>* tmp = m_pRoot;
 		bool bFoundPlaceHolder = false;
 
 		while(tmp->isPointInside({ x,y }))
@@ -140,7 +140,7 @@ protected:
 			if (tmp->isManager())
 			{
 				bFoundPlaceHolder = false;
-				typename CPlaceHolder<T>::CAbsBaseManager* tmp2 = dynamic_cast<typename CPlaceHolder<T>::CAbsBaseManager*>(tmp);
+				typename CAbsBasePlaceHolder<T>::CAbsBaseManager* tmp2 = dynamic_cast<typename CAbsBasePlaceHolder<T>::CAbsBaseManager*>(tmp);
 				for (size_t li = 0; li < tmp2->getChildCount(); li++)
 				{
 					if (tmp2->getChildPlaceHolder(li)->isPointInside({ x,y }))
@@ -163,9 +163,9 @@ protected:
 	}
 
 private:
-	typename CPlaceHolder<T>::CAbsBaseManager* m_pRoot;
+	typename CAbsBasePlaceHolder<T>::CAbsBaseManager* m_pRoot;
 	HWND m_hWnd;
-	CPlaceHolder<T>* m_pDragPlaceHolder;
+	CAbsBasePlaceHolder<T>* m_pDragPlaceHolder;
 	T m_X;
 	T m_Y;
 	HBRUSH m_Background;
