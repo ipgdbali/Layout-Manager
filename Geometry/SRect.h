@@ -38,6 +38,20 @@ namespace ipgdlib
 			{
 			}
 
+			SRect(SRect<T> && r) :
+				SRect(std::move(r.left), std::move(r.top), std::move(r.right), std::move(r.bottom))
+			{
+			}
+
+			SRect<T>& operator = (SRect&& r)
+			{
+				this->left		= std::move(r.left);
+				this->top		= std::move(r.top);
+				this->right		= std::move(r.right);
+				this->bottom	= std::move(r.bottom);
+				return *this;
+			}
+
 			template <typename U>
 			SRect(const SRect<U>& ref) :
 				left(T(ref.left)), top(T(ref.top)), right(T(ref.right)), bottom(T(ref.bottom))

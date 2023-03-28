@@ -33,7 +33,7 @@
     <ClInclude Include="CPanelTool.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CMouseHandler.h">
+    <ClInclude Include="CMyMouseHandler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

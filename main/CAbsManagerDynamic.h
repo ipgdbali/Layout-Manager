@@ -17,68 +17,39 @@ namespace ipgdlib
 
             template <
                 typename _TCustomData = TCustomData,
-                typename std::enable_if< std::is_same<_TCustomData, void>::value, bool >::type = true
+                typename std::enable_if< 
+                    std::is_same<_TCustomData, void>::value, 
+                    bool 
+                >::type = true
             >
-            CAbsManagerDynamic(const std::vector<child_item_type>& childs)
-                : CAbsManager<T,TCustomData, TChildItem>(), m_Childs(childs)
+            CAbsManagerDynamic(std::vector<child_item_type> && childs) : 
+                CAbsManager<T, TCustomData, TChildItem>(),
+                m_Childs(std::move(childs))
             {
                 for (size_t li = 0; li < childs.size(); li++)
-                    CAbsManager<T, TCustomData, TChildItem>::setChildParent(this->getChildPlaceHolder(li));
+                    CAbsManager<T, TCustomData, TChildItem>::setChildParent(
+                        this->getChildPlaceHolder(li)
+                    );
             }
 
             template <
                 typename _TCustomData = TCustomData,
-                typename std::enable_if< std::is_same<_TCustomData, void>::value, bool >::type = true
+                typename std::enable_if< 
+                    !std::is_same<_TCustomData, void>::value, 
+                    bool 
+                >::type = true
             >
-            CAbsManagerDynamic(std::vector<child_item_type> && childs)
-                : CAbsManager<T, TCustomData, TChildItem>(), m_Childs(std::move(childs))
+            CAbsManagerDynamic(
+                _TCustomData && customData, 
+                std::vector<child_item_type> && childs
+            ) : 
+                CAbsManager<T, TCustomData, TChildItem>(std::move(customData)), 
+                m_Childs(std::move(childs))
             {
                 for (size_t li = 0; li < childs.size(); li++)
-                    CAbsManager<T, TCustomData, TChildItem>::setChildParent(this->getChildPlaceHolder(li));
-            }
-
-            template <
-                typename _TCustomData = TCustomData,
-                typename std::enable_if< !std::is_same<_TCustomData, void>::value, bool >::type = true
-            >
-            CAbsManagerDynamic(const _TCustomData& customData, const std::vector<child_item_type>& childs)
-                : CAbsManager<T, TCustomData, TChildItem>(customData), m_Childs(childs)
-            {
-                for (size_t li = 0; li < childs.size(); li++)
-                    CAbsManager<T, TCustomData, TChildItem>::setChildParent(this->getChildPlaceHolder(li));
-            }
-
-            template <
-                typename _TCustomData = TCustomData,
-                typename std::enable_if< !std::is_same<_TCustomData, void>::value, bool >::type = true
-            >
-            CAbsManagerDynamic(const _TCustomData& customData, std::vector<child_item_type>&& childs)
-                : CAbsManager<T, TCustomData, TChildItem>(customData), m_Childs(std::move(childs))
-            {
-                for (size_t li = 0; li < childs.size(); li++)
-                    CAbsManager<T, TCustomData, TChildItem>::setChildParent(this->getChildPlaceHolder(li));
-            }
-
-            template <
-                typename _TCustomData = TCustomData,
-                typename std::enable_if< !std::is_same<_TCustomData, void>::value, bool >::type = true
-            >
-            CAbsManagerDynamic(_TCustomData & customData, const std::vector<child_item_type> & childs)
-                : CAbsManager<T, TCustomData, TChildItem>(customData), m_Childs(childs)
-            {
-                for (size_t li = 0; li < childs.size(); li++)
-                    CAbsManager<T, TCustomData, TChildItem>::setChildParent(this->getChildPlaceHolder(li));
-            }
-
-            template <
-                typename _TCustomData = TCustomData,
-                typename std::enable_if< !std::is_same<_TCustomData, void>::value, bool >::type = true
-            >
-            CAbsManagerDynamic(_TCustomData && customData, std::vector<child_item_type> && childs)
-                : CAbsManager<T, TCustomData, TChildItem>(std::move(customData)), m_Childs(std::move(childs))
-            {
-                for (size_t li = 0; li < childs.size(); li++)
-                    CAbsManager<T, TCustomData, TChildItem>::setChildParent(this->getChildPlaceHolder(li));
+                    CAbsManager<T, TCustomData, TChildItem>::setChildParent(
+                        this->getChildPlaceHolder(li)
+                    );
             }
 
             size_t getChildCount() const override

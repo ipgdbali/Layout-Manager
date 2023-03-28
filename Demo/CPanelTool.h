@@ -38,9 +38,9 @@ protected:
 		//DrawFrameControl(hdc, &r, DFC_CAPTION, DFCS_CAPTIONCLOSE);
 	}
 
-	void onChangeRect(Rect& r, const Rect& nr) override
+	void onChangeRect(Rect& r, Rect && nr) override
 	{
-		CPanelAbs<T>::onChangeRect(r, nr);
+		CPanelAbs<T>::onChangeRect(r, std::move(nr));
 		this->setClientRect(Default->onCalcClientRect(nr));
 	}
 

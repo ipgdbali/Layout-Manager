@@ -71,8 +71,8 @@ namespace ipgdlib
 		public:
 			using child_item_type = CAbsManagerDynamic<T, size_t,TCustomData>::child_item_type;
 
-			CLMDividerVert(const T& spacing, std::vector< child_item_type > v)
-				: m_Spacing(spacing), CAbsManagerDynamic<T, size_t,TCustomData>(v)
+			CLMDividerVert(T spacing, std::vector< child_item_type > v)
+				: m_Spacing(std::move(spacing)), CAbsManagerDynamic<T, size_t,TCustomData>(std::move(v))
 			{
 			}
 

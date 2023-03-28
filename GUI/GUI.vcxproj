@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CDragManager.h" />
+    <ClInclude Include="CMouseHandler.h" />
     <ClInclude Include="CWindow.h" />
     <ClInclude Include="CWndApp.h" />
     <ClInclude Include="CWndClass.h" />

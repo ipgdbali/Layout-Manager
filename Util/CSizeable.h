@@ -19,6 +19,11 @@ namespace ipgdlib
 			{
 			}
 
+			CSizeable(T && size) :
+				m_Size(std::move(size))
+			{
+			}
+
 			const T& getSize() const override
 			{
 				return this->m_Size;

@@ -16,7 +16,7 @@
 #include "CPanelAbs.h"
 #include "CPanelBar.h"
 #include "CPanelTool.h"
-#include "CMouseHandler.h"
+#include "CMyMouseHandler.h"
 
 using namespace ipgdlib::layout;
 using namespace ipgdlib::os::window;
@@ -24,7 +24,7 @@ using namespace ipgdlib::os::window;
 #define CLASS_NAME _T("My Class")
 
 CAbsBasePlaceHolder<int>::CAbsBaseManager * pRoot;
-CMouseHandler<int> *pMouseHandler;
+CMyMouseHandler<int> *pMouseHandler;
 IPanelManager<int> *CPanelTool<int>::Default = nullptr;
 
 
@@ -44,7 +44,8 @@ static LRESULT Wndproc(
 			GetClassInfoEx(GetModuleHandle(NULL), CLASS_NAME, &wc);
 			CPanelTool<int>::Default = new CPanelManager<int>(25,{ BS_SOLID ,RGB(200,200,200)});
 			
-			pRoot = new CLMSplitterVert<int, eSplitterKind::eFixedScaled>(30, 5,
+			pRoot = 
+			new CLMSplitterVert<int, eSplitterKind::eFixedScaled,bool>(true,30, 5,
 				{
 					new CPanelBar<int>(),
 					new CLMSplitterVert<int,eSplitterKind::eScaledFixed>(30,5,
@@ -62,9 +63,9 @@ static LRESULT Wndproc(
 												new CPanelBar<int>(),
 												new CLMDividerVert<int>(5,
 													{
+														{1,new CPanelBar<int>()},
 														{2,new CPanelTool<int>()},
-														{3,new CPanelBar<int>()},
-														{2,new CPanelTool<int>()}
+														{1,new CPanelBar<int>()}
 													})
 											})
 									})
@@ -73,26 +74,27 @@ static LRESULT Wndproc(
 						})
 				});
 
-			pMouseHandler = new CMouseHandler<int>(hWnd, wc.hbrBackground,pRoot);
+
+			pMouseHandler = new CMyMouseHandler<int>(hWnd, wc.hbrBackground,pRoot);
 
 			return 0;
 		}
 		
 		case WM_LBUTTONDOWN:
 		{
-			pMouseHandler->onLButtonDown(GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam));
+			pMouseHandler->onLButtonDown({ GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam) });
 			return 0;
 		}break;
 
 		case WM_LBUTTONUP:
 		{
-			pMouseHandler->onLButtonUp(GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam));
+			pMouseHandler->onLButtonUp({ GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam) });
 			return 0;
 		}break;
 
 		case WM_MOUSEMOVE:
 		{
-			pMouseHandler->onMouseMove(GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam));
+			pMouseHandler->onMouseMove({ GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam) });
 			return 0;
 		}break;
 

@@ -8,7 +8,10 @@ namespace ipgdlib
 	namespace layout
 	{
 
-		template <typename T,typename TCustomData = void>
+		template <
+			typename T,
+			typename TCustomData = void
+		>
 		class CLMPadder :
 			public CAbsManagerStatic<T,1,TCustomData, void>
 		{
@@ -18,10 +21,17 @@ namespace ipgdlib
 
 			template <
 				typename _V = TCustomData,
-				typename std::enable_if< std::is_same<_V, void>::value, bool >::type = true
+				typename std::enable_if< 
+					std::is_same<_V, void>::value, 
+					bool 
+				>::type = true
 			>
-			CLMPadder(const Rect& padding, CAbsBasePlaceHolder<T>* const pPlaceHolder) :
-				CAbsManagerStatic<T, 1,TCustomData,void>({ pPlaceHolder }), m_Padding(padding)
+			CLMPadder(
+				Rect padding, 
+				CAbsBasePlaceHolder<T>* const pPlaceHolder
+			) :
+				m_Padding(std::move(padding)),
+				CAbsManagerStatic<T, 1,TCustomData,void>({ pPlaceHolder })
 			{
 			}
 
@@ -29,8 +39,13 @@ namespace ipgdlib
 				typename _V = TCustomData,
 				typename std::enable_if< !std::is_same<_V, void>::value, bool >::type = true
 			>
-			CLMPadder(const _V& customData,const Rect& padding, CAbsBasePlaceHolder<T>* const pPlaceHolder) :
-				CAbsManagerStatic<T, 1,TCustomData,void>(customData,{ pPlaceHolder }), m_Padding(padding)
+			CLMPadder(
+				_V customData,
+				Rect padding, 
+				CAbsBasePlaceHolder<T>* const pPlaceHolder
+			) :
+				CAbsManagerStatic<T, 1,TCustomData,void>(customData,{ pPlaceHolder }), 
+				m_Padding(padding)
 			{
 			}
 

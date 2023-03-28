@@ -7,7 +7,10 @@ namespace ipgdlib
     namespace layout
     {
 
-        template <typename T,typename TCustomData=void>
+        template <
+            typename T,
+            typename TCustomData = void
+        >
         class CPlaceHolder : 
             public CAbsBasePlaceHolder<T>,
             public CCustomData<TCustomData>
@@ -19,28 +22,27 @@ namespace ipgdlib
 
                 template <
                     typename _TCustomData = TCustomData,
-                    typename std::enable_if< std::is_same<_TCustomData, void>::value, bool >::type = true
+                    typename std::enable_if< 
+                        std::is_same<_TCustomData, void>::value, 
+                        bool
+                    >::type = true
                 >
                 CPlaceHolder() :
-                    CAbsBasePlaceHolder<T>(),CCustomData<_TCustomData>()
+                    CAbsBasePlaceHolder<T>(),
+                    CCustomData<_TCustomData>()
                 {
                 }
 
                 template <
                     typename _TCustomData = TCustomData,
-                    typename std::enable_if< !std::is_same<_TCustomData, void>::value, bool >::type = true
+                    typename std::enable_if< 
+                        !std::is_same<_TCustomData, void>::value, 
+                        bool 
+                    >::type = true
                 >
-                CPlaceHolder(const _TCustomData& customData)
-                    : CAbsBasePlaceHolder<T>(),CCustomData<_TCustomData>(customData)
-                {
-                }
-
-                template <
-                    typename _TCustomData = TCustomData,
-                    typename std::enable_if< !std::is_same<_TCustomData, void>::value, bool >::type = true
-                >
-                CPlaceHolder(_TCustomData && customData)
-                    : CAbsBasePlaceHolder<T>(), CCustomData<_TCustomData>(std::move(customData))
+                CPlaceHolder(_TCustomData customData) : 
+                    CAbsBasePlaceHolder<T>(),
+                    CCustomData<_TCustomData>(std::move(customData))
                 {
                 }
 
@@ -49,10 +51,7 @@ namespace ipgdlib
                     return false;
                 }
 
-
         };
-
-
 
     };
 };

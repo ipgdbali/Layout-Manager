@@ -20,6 +20,11 @@ namespace ipgdlib
 			{
 			}
 
+			CSizeableAutoReCalculate(T && size) :
+				ipgdlib::util::CSizeable<T>(std::move(size))
+			{
+			}
+
 			void setSize(const T& size) override
 			{
 				ipgdlib::util::CSizeable<T>::setSize(size);

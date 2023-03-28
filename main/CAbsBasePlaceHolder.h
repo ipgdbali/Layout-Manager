@@ -35,9 +35,9 @@ namespace ipgdlib
                 return this->m_Rect;
             }
 
-            void changeRect(const Rect& r)
+            void changeRect(Rect r)
             {
-                this->onChangeRect(this->m_Rect, r);
+                this->onChangeRect(this->m_Rect, std::move(r));
             }
 
             bool hasParent() const
@@ -51,9 +51,9 @@ namespace ipgdlib
             }
 
         protected:
-            virtual void onChangeRect(Rect& r, const Rect& nr)
+            virtual void onChangeRect(Rect& r, Rect && nr)
             {
-                r = nr;
+                r = std::move(nr);
             }
 
             void setParent(CAbsBaseManager* const parent)

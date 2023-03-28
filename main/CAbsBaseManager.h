@@ -24,7 +24,8 @@ namespace ipgdlib
             using Point = CAbsBasePlaceHolder<T>::Point;
 
             CAbsBaseManager() :
-                CAbsBasePlaceHolder<T>(), CAbsAutoReCalculate()
+                CAbsBasePlaceHolder<T>(), 
+                CAbsAutoReCalculate()
             {
             }
 
@@ -46,13 +47,13 @@ namespace ipgdlib
 
             virtual size_t getChildCount() const = 0;
 
-            virtual CAbsBasePlaceHolder<T>* const& getChildPlaceHolder(size_t index) const = 0;
+            virtual CAbsBasePlaceHolder<T>* const & getChildPlaceHolder(size_t index) const = 0;
 
             virtual void setChildPlaceHolder(size_t index, CAbsBasePlaceHolder<T>* const pChildPlaceHolder)
             {
                 if (pChildPlaceHolder)
                 {
-                    CAbsBasePlaceHolder<T>*& pInternal = this->getChildPlaceHolderRef(index);
+                    CAbsBasePlaceHolder<T>* &pInternal = this->getChildPlaceHolderRef(index);
                     if (pInternal != nullptr)
                     {
                         clearChildParent(pInternal);
@@ -63,24 +64,17 @@ namespace ipgdlib
                 }
             }
 
-            bool setChildPlaceHolders(const std::vector< CAbsBasePlaceHolder<T>* >& pChildPlaceHolders)
+            bool setChildPlaceHolders(std::vector< CAbsBasePlaceHolder<T>* > && pChildPlaceHolders)
             {
-                if (pChildPlaceHolders->size() == this->getChildCount())
-                {
-                    for (size_t li = 0; li < this->getChildCount(); li++)
-                        this->setChildPlaceHolder(li, pChildPlaceHolders[li]);
-                    return true;
-                }
-                else
-                    return false;
+                throw "Not Implemented Yet";
             }
 
         protected:
-            virtual CAbsBasePlaceHolder<T>*& getChildPlaceHolderRef(size_t index) = 0;
+            virtual CAbsBasePlaceHolder<T>* &getChildPlaceHolderRef(size_t index) = 0;
 
-            void onChangeRect(Rect& oRect, const Rect& nRect) override
+            void onChangeRect(Rect & oRect, Rect && nRect) override
             {
-                CAbsBasePlaceHolder<T>::onChangeRect(oRect, nRect);
+                CAbsBasePlaceHolder<T>::onChangeRect(oRect, std::move(nRect));
                 this->reCalculate();
             }
 

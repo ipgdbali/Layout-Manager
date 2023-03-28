@@ -127,7 +127,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="CMouseHandler.h" />
+    <ClInclude Include="CMyMouseHandler.h" />
     <ClInclude Include="CPanelBar.h" />
     <ClInclude Include="CMyDragManager.h" />
     <ClInclude Include="CPanelAbs.h" />

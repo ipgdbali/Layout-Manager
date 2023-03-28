@@ -34,9 +34,9 @@ public:
 	{
 	}
 
-	void onChangeRect(Rect& r, const Rect& nr) override
+	void onChangeRect(Rect& r, Rect && nr) override
 	{
-		CPanelAbs<T>::onChangeRect(r, nr);
+		CPanelAbs<T>::onChangeRect(r, std::move(nr));
 		this->setClientRect(nr);
 	}
 };

@@ -16,8 +16,8 @@ namespace ipgdlib
             public CSizeableAutoReCalculate<T>
         {
             public:
-                CAbsSplitter(const T& sizeFixed,const T& space) :
-                    CSizeableAutoReCalculate<T>(sizeFixed),m_Space(space)
+                CAbsSplitter(T && sizeFixed,T && space) :
+                    CSizeableAutoReCalculate<T>(std::move(sizeFixed)),m_Space(std::move(space))
                 {
                 }
 
@@ -47,10 +47,38 @@ namespace ipgdlib
         {
 
             public:
-                CLMSplitterHorz(const T& sizeFixed, const T& space,
-                    std::array<CAbsBasePlaceHolder<T>*,2> pPlaceHolder) : 
-                        CAbsSplitter<T>(sizeFixed,space), 
-                        CAbsManagerStatic<T,2,TCustomData, void>(pPlaceHolder)
+                template <
+                    typename _TCustomData = TCustomData,
+                    typename std::enable_if< 
+                        std::is_same<_TCustomData, void>::value, 
+                        bool 
+                    >::type = true
+                >
+                CLMSplitterHorz(
+                    T sizeFixed, 
+                    T space,
+                    std::array<CAbsBasePlaceHolder<T>*,2> pPlaceHolder
+                ) : 
+                    CAbsSplitter<T>(std::move(sizeFixed),std::move(space)), 
+                    CAbsManagerStatic<T,2,TCustomData, void>(std::move(pPlaceHolder))
+                {
+                }
+
+                template <
+                    typename _TCustomData = TCustomData,
+                    typename std::enable_if< 
+                        !std::is_same<_TCustomData, void>::value, 
+                        bool 
+                    >::type = true
+                >
+                CLMSplitterHorz(
+                    _TCustomData customData,
+                    T sizeFixed, 
+                    T space,
+                    std::array<CAbsBasePlaceHolder<T>*, 2> pPlaceHolder
+                ) :
+                    CAbsSplitter<T>(std::move(sizeFixed), std::move(space)),
+                    CAbsManagerStatic<T, 2, TCustomData, void>(std::move(customData),std::move(pPlaceHolder))
                 {
                 }
 
@@ -102,14 +130,44 @@ namespace ipgdlib
 
         template <typename T,eSplitterKind kind, typename TCustomData = void>
         class CLMSplitterVert :
-            public CAbsManagerStatic<T,2,void,TCustomData>,
+            public CAbsManagerStatic<T,2,TCustomData,void>,
             public CAbsSplitter<T>
         {
 
             public:
-                CLMSplitterVert(const T& sizeFixed, const T& space,
-                    std::array<CAbsBasePlaceHolder<T>*,2> pPlaceHolder)
-                    : CAbsSplitter<T>(sizeFixed,space), CAbsManagerStatic<T,2,void,TCustomData>(pPlaceHolder)
+
+                template <
+                    typename _TCustomData = TCustomData,
+                    typename std::enable_if< 
+                        std::is_same<_TCustomData, void>::value, 
+                        bool 
+                    >::type = true
+                >
+                CLMSplitterVert(
+                    T sizeFixed, 
+                    T space,
+                    std::array<CAbsBasePlaceHolder<T>*,2> pPlaceHolder
+                ) : 
+                    CAbsSplitter<T>(std::move(sizeFixed),std::move(space)), 
+                    CAbsManagerStatic<T,2,void,TCustomData>(std::move(pPlaceHolder))
+                {
+                }
+
+                template <
+                    typename _TCustomData = TCustomData,
+                    typename std::enable_if< 
+                        !std::is_same<_TCustomData, void>::value, 
+                        bool 
+                    >::type = true
+                >
+                CLMSplitterVert(
+                    _TCustomData customData,
+                    T sizeFixed, 
+                    T space,
+                    std::array<CAbsBasePlaceHolder<T>*, 2> pPlaceHolder
+                ) : 
+                    CAbsSplitter<T>(std::move(sizeFixed), std::move(space)), 
+                    CAbsManagerStatic<T, 2, TCustomData,void>(std::move(customData),std::move(pPlaceHolder))
                 {
                 }
 
