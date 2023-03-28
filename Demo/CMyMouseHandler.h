@@ -90,7 +90,7 @@ public:
 		}
 		else
 		{
-			dynamic_cast<CPanelAbs<T>*>(tmp)->onLButtonDown(m_hWnd, pos.x, pos.y);
+			dynamic_cast<CPanelAbs<T>*>(tmp)->onLButtonDown(m_hWnd, pos);
 		}
 	}
 
@@ -134,7 +134,7 @@ public:
 			}
 			else
 			{
-				dynamic_cast<CPanelAbs<T>*>(tmp)->onLButtonUp(m_hWnd, pos.x, pos.y);
+				dynamic_cast<CPanelAbs<T>*>(tmp)->onLButtonUp(m_hWnd, pos);
 			}
 		}
 		CMouseHandler<T,SDragItem<T>>::onLButtonUp(std::move(pos));
@@ -151,7 +151,7 @@ public:
 			}
 			else
 			{
-				dynamic_cast<CPanelAbs<T>*>(tmp)->onMouseMove(m_hWnd, pos.x, pos.y);
+				dynamic_cast<CPanelAbs<T>*>(tmp)->onMouseMove(m_hWnd, pos);
 			}
 		}
 	}

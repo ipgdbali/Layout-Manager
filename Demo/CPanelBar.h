@@ -10,27 +10,28 @@ class CPanelBar :
 {
 public:
 	using Rect = ipgdlib::geometry::SRect<T>;
+	using Point = ipgdlib::geometry::SPoint<T>;
 
 	void draw(HDC hdc) override
 	{
 		FillRect(hdc, &this->getClientRect(), (HBRUSH)GetStockObject(WHITE_BRUSH));
 	}
 
-	void onLButtonDown(HWND hWnd,const T& x, const T& y) override
+	void onLButtonDown(HWND hWnd,Point pos) override
 	{
 		HDC dc = GetDC(hWnd);
 		FillRect(dc, &this->getClientRect(), (HBRUSH)GetStockObject(BLACK_BRUSH));
 		ReleaseDC(hWnd,dc);
 	}
 
-	void onLButtonUp(HWND hWnd,const T& x, const T& y) override
+	void onLButtonUp(HWND hWnd,Point pos) override
 	{
 		HDC dc = GetDC(hWnd);
 		FillRect(dc, &this->getClientRect(), (HBRUSH)GetStockObject(WHITE_BRUSH));
 		ReleaseDC(hWnd, dc);
 	}
 
-	void onMouseMove(HWND hWnd, const T& x, const T& y) override
+	void onMouseMove(HWND hWnd, Point pos) override
 	{
 	}
 

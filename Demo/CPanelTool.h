@@ -6,6 +6,8 @@ class CPanelTool :
 	public CPanelAbs<T>
 {
 public:
+	using Rect = ipgdlib::geometry::SRect<T>;
+	using Point = ipgdlib::geometry::SPoint<T>;
 
 	static IPanelManager<T>* Default;
 
@@ -17,16 +19,16 @@ public:
 		this->onDrawClient(hdc);
 	}
 
-	void onLButtonDown(HWND hWnd, const T& x, const T& y) override
+	void onLButtonDown(HWND hWnd, Point pos) override
 	{
 	}
 
-	void onLButtonUp(HWND hWnd, const T& x, const T& y) override
+	void onLButtonUp(HWND hWnd, Point pos) override
 	{
 
 	}
 
-	void onMouseMove(HWND hWnd, const T& x, const T& y) override
+	void onMouseMove(HWND hWnd, Point pos) override
 	{
 	}
 
