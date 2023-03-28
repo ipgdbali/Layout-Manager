@@ -12,6 +12,7 @@ class CPanelAbs :
 {
 public:
     using Rect = ipgdlib::geometry::SRect<T>;
+    using Point = ipgdlib::geometry::SPoint<T>;
 
     CPanelAbs() :
         CPlaceHolder<T>(), m_ClientRect({0})
@@ -24,9 +25,9 @@ public:
     }
 
     virtual void draw(HDC hdc) = 0;
-    virtual void onLButtonDown(HWND hWnd,const T& x, const T& y) = 0;
-    virtual void onLButtonUp(HWND hWnd, const T& x, const T& y) = 0;
-    virtual void onMouseMove(HWND hWnd, const T& x, const T& y) = 0;
+    virtual void onLButtonDown(HWND hWnd,Point pos) = 0;
+    virtual void onLButtonUp(HWND hWnd, Point pos) = 0;
+    virtual void onMouseMove(HWND hWnd, Point pos) = 0;
 
 protected:
     void setClientRect(const RECT& r)

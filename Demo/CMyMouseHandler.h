@@ -80,7 +80,7 @@ public:
 	void onLButtonDown(SPoint<T> pos) override
 	{
 		CMouseHandler<T,SDragItem<T>>::onLButtonDown(std::move(pos));
-		CAbsBasePlaceHolder<T>* tmp = findPlaceHolder(pos.x, pos.y);
+		CAbsBasePlaceHolder<T>* tmp = findPlaceHolder(pos);
 
 		this->getDragItemRef().pPlaceHolder = tmp;
 
@@ -90,7 +90,7 @@ public:
 		}
 		else
 		{
-			dynamic_cast<CPanelAbs<T>*>(tmp)->onLButtonDown(m_hWnd, pos.x, pos.y);
+			dynamic_cast<CPanelAbs<T>*>(tmp)->onLButtonDown(m_hWnd, pos);
 		}
 	}
 
@@ -134,7 +134,7 @@ public:
 			}
 			else
 			{
-				dynamic_cast<CPanelAbs<T>*>(tmp)->onLButtonUp(m_hWnd, pos.x, pos.y);
+				dynamic_cast<CPanelAbs<T>*>(tmp)->onLButtonUp(m_hWnd, pos);
 			}
 		}
 		CMouseHandler<T,SDragItem<T>>::onLButtonUp(std::move(pos));
@@ -151,19 +151,19 @@ public:
 			}
 			else
 			{
-				dynamic_cast<CPanelAbs<T>*>(tmp)->onMouseMove(m_hWnd, pos.x, pos.y);
+				dynamic_cast<CPanelAbs<T>*>(tmp)->onMouseMove(m_hWnd, pos);
 			}
 		}
 	}
 
 protected:
 
-	typename CAbsBasePlaceHolder<T>* findPlaceHolder(T x, T y)
+	typename CAbsBasePlaceHolder<T>* findPlaceHolder(SPoint<T> pos)
 	{
 		CAbsBasePlaceHolder<T>* tmp = m_pRoot;
 		bool bFoundPlaceHolder = false;
 
-		while(tmp->isPointInside({ x,y }))
+		while(tmp->isPointInside(pos))
 		{
 			if (tmp->isManager())
 			{
@@ -171,7 +171,7 @@ protected:
 				typename CAbsBasePlaceHolder<T>::CAbsBaseManager* tmp2 = dynamic_cast<typename CAbsBasePlaceHolder<T>::CAbsBaseManager*>(tmp);
 				for (size_t li = 0; li < tmp2->getChildCount(); li++)
 				{
-					if (tmp2->getChildPlaceHolder(li)->isPointInside({ x,y }))
+					if (tmp2->getChildPlaceHolder(li)->isPointInside(pos))
 					{
 						tmp = tmp2->getChildPlaceHolder(li);
 						bFoundPlaceHolder = true;
