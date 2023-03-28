@@ -7,14 +7,14 @@
 using namespace ipgdlib::layout;
 using namespace ipgdlib::os;
 
-void draw(CAbsBasePlaceHolder<int>* pPlaceHolder, HDC hdc)
+void draw(HDC hdc, CAbsBasePlaceHolder<int>* pPlaceHolder)
 {
 	if (pPlaceHolder->isManager())
 	{
 		CAbsBasePlaceHolder<int>::CAbsBaseManager* manager =
 			dynamic_cast<CAbsBasePlaceHolder<int>::CAbsBaseManager*>(pPlaceHolder);
 		for (int li = 0; li < manager->getChildCount(); li++)
-			draw(manager->getChildPlaceHolder(li), hdc);
+			draw(hdc,manager->getChildPlaceHolder(li));
 	}
 	else
 	{
@@ -126,10 +126,12 @@ public:
 						tmp->getRect().right,
 						tmp->getRect().bottom 
 					};
+
 					HDC hdc = this->getDragItemRef().hdc;
 					FillRect(hdc, &r, this->m_Background);
-					draw(tmp, hdc);
+					draw(hdc,tmp);
 					ReleaseDC(this->m_hWnd, this->getDragItemRef().hdc);
+					this->getDragItemRef().clear();
 				}
 			}
 			else
@@ -191,6 +193,8 @@ protected:
 	}
 
 private:
+
+
 	typename CAbsBasePlaceHolder<T>::CAbsBaseManager* m_pRoot;
 	HWND m_hWnd;
 	HBRUSH m_Background;

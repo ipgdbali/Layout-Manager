@@ -109,7 +109,7 @@ static LRESULT Wndproc(
 		{
 			PAINTSTRUCT ps;
 			BeginPaint(hWnd, &ps);
-			draw(pRoot, ps.hdc);
+			draw(ps.hdc,pRoot);
 			EndPaint(hWnd, &ps);
 			return 0;
 		}break;
