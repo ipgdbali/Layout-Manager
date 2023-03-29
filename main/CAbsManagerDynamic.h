@@ -22,7 +22,7 @@ namespace ipgdlib
                     bool 
                 >::type = true
             >
-            CAbsManagerDynamic(std::vector<child_item_type> && childs) : 
+            CAbsManagerDynamic(std::vector<child_item_type> childs) : 
                 CAbsManager<T, TCustomData, TChildItem>(),
                 m_Childs(std::move(childs))
             {
@@ -40,8 +40,8 @@ namespace ipgdlib
                 >::type = true
             >
             CAbsManagerDynamic(
-                _TCustomData && customData, 
-                std::vector<child_item_type> && childs
+                _TCustomData customData, 
+                std::vector<child_item_type> childs
             ) : 
                 CAbsManager<T, TCustomData, TChildItem>(std::move(customData)), 
                 m_Childs(std::move(childs))
@@ -50,6 +50,11 @@ namespace ipgdlib
                     CAbsManager<T, TCustomData, TChildItem>::setChildParent(
                         this->getChildPlaceHolder(li)
                     );
+            }
+
+            eVectorKind getVectorKind() const override
+            {
+                return eVectorKind::Dynamic;
             }
 
             size_t getChildCount() const override
@@ -63,6 +68,12 @@ namespace ipgdlib
             }
 
         protected:
+
+            std::vector<child_item_type> &getVector()
+            {
+                return this->m_Childs;
+            }
+
 
             child_item_type& getChildRef(size_t index) override
             {

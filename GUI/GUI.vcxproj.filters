@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="CDragManager.h">
+    <ClInclude Include="Mouse\CDragManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="CWindow.h">
@@ -27,7 +27,40 @@
     <ClInclude Include="CWndClass.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CMouseHandler.h">
+    <ClInclude Include="Mouse\CMouseHandler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Mouse\IDragable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Mouse\CAbsDragable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Region\IRegion.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Region\CRegionRectangle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Region\IRegionOperation.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Region\CRegionOperationUnion.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Region\CRegionOperationIntersection.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Region\CRegionOperationSubtraction.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Region\IRegionOperationUnary.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Region\IRegionOperationBinary.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Region\CAbsRegionOperationBinary.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

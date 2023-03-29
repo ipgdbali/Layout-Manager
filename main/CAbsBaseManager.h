@@ -12,6 +12,7 @@ namespace ipgdlib
         using namespace ipgdlib::util;
 
         enum class eAffectedAxis { Horizontal, Vertical, Both };
+        enum class eVectorKind { Static,Dynamic };
 
         template <typename T>
         class CAbsBasePlaceHolder<T>::CAbsBaseManager :
@@ -30,6 +31,8 @@ namespace ipgdlib
             }
 
             virtual eAffectedAxis getAffectedAxis() const = 0;
+
+            virtual eVectorKind getVectorKind() const = 0;
 
             bool isManager() const override final
             {
@@ -64,7 +67,7 @@ namespace ipgdlib
                 }
             }
 
-            bool setChildPlaceHolders(std::vector< CAbsBasePlaceHolder<T>* > && pChildPlaceHolders)
+            bool setChildPlaceHolders(std::vector< CAbsBasePlaceHolder<T>* > pChildPlaceHolders)
             {
                 throw "Not Implemented Yet";
             }

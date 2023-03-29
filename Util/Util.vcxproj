@@ -129,11 +129,16 @@
   <ItemGroup>
     <ClInclude Include="CAbsAutoReCalculate.h" />
     <ClInclude Include="CCustomData.h" />
+    <ClInclude Include="CNullableT.h" />
     <ClInclude Include="CSizeable.h" />
     <ClInclude Include="CSizeableAutoReCalculate.h" />
+    <ClInclude Include="CVectorDynamic.h" />
+    <ClInclude Include="CVectorStatic.h" />
     <ClInclude Include="IAutoReCalculate.h" />
+    <ClInclude Include="INullable.h" />
     <ClInclude Include="IReCalculate.h" />
     <ClInclude Include="ISizeable.h" />
+    <ClInclude Include="IVector.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

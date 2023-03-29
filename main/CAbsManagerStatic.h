@@ -28,7 +28,7 @@ namespace ipgdlib
                     bool 
                 >::type = true
             >
-            CAbsManagerStatic(std::array<child_item_type, n> && childs) :
+            CAbsManagerStatic(std::array<child_item_type, n> childs) :
                 CAbsManager<T, TCustomData, TChildItem>(), 
                 m_Childs(std::move(childs))
             {
@@ -46,8 +46,8 @@ namespace ipgdlib
                 >::type = true
             >
             CAbsManagerStatic(
-                _TCustomData && customData, 
-                std::array<child_item_type, n> && childs
+                _TCustomData customData, 
+                std::array<child_item_type, n> childs
             ) : 
                 CAbsManager<T, TCustomData, TChildItem>(std::move(customData)), 
                 m_Childs(std::move(childs))
@@ -56,6 +56,11 @@ namespace ipgdlib
                     CAbsManager<T, TCustomData, TChildItem>::setChildParent(
                         this->getChildPlaceHolder(li)
                     );
+            }
+
+            eVectorKind getVectorKind() const override
+            {
+                return eVectorKind::Static;
             }
 
             size_t getChildCount() const override
@@ -69,6 +74,11 @@ namespace ipgdlib
             }
 
         protected:
+
+            std::array<child_item_type, n> &getVector()
+            {
+                return this->m_Childs;
+            }
 
             child_item_type &getChildRef(size_t index) override
             {
