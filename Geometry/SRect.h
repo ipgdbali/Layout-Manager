@@ -230,17 +230,7 @@ namespace ipgdlib
 				return { this->left + delta.a,this->top + delta.b,this->right + delta.a,this->bottom + delta.b};
 			}
 
-			SRect<T> unionWith()(const SRect<T>& r)
-			{
-				return {
-					(this->left < r.left) ? this->left : r.left,
-					(this->top < r.top) ? this->top : r.top,
-					(this->right < r.right) ? this->right : r.right ,
-					(this->bottom < r.bottom) ? this->bottom : r.bottom
-				};
-			}
-
-			SRect<T> intersectWith()(const SRect<T>& r)
+			SRect<T> unionWith(const SRect<T>& r) const
 			{
 				return {
 					(this->left < r.left) ? this->left : r.left,

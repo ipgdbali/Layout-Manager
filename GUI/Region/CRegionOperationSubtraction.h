@@ -1,6 +1,6 @@
 #pragma once
 
-#include "IRegionOperationBinary.h"
+#include "CAbsRegionOperationBinary.h"
 
 namespace ipgdlib
 {
@@ -9,35 +9,20 @@ namespace ipgdlib
 
 		template <typename T>
 		class CRegionOperationSubtraction :
-			public IRegionOperationBinary<T>
+			public CAbsRegionOperationBinary<T>
 		{
 
 		public:
-			CRegionOperationSubtraction(const IRegion<T>& lhs, const IRegion<T>& rhs) :
-				m_Lhs(lhs), m_Rhs(rhs)
+			CRegionOperationSubtraction(CAbsRegion<T>& lhs, CAbsRegion<T>& rhs) :
+				CAbsRegionOperationBinary<T>(lhs, rhs)
 			{
-			}
-
-			const IRegion<T>& getLhs() const override
-			{
-				return this->m_Lhs;
-			}
-
-			const IRegion<T>& getRhs() const override
-			{
-				return this->m_Rhs;
 			}
 
 			bool isPointInside(const Point& p) const override
 			{
-				return m_Lhs.isPointInside(p) && !m_Rhs.isPointInside(p);
+				return this->getLhs().isPointInside(p) && !this->getRhs().isPointInside(p);
 			}
 
-		protected:
-
-		private:
-			const IRegion<T>& m_Lhs;
-			const IRegion<T>& m_Rhs;
 		};
 
 	}

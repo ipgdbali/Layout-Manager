@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../main/CPlaceHolder.h"
-#include "../GUI/CMouseHandler.h"
+#include "../GUI/Mouse/CMouseHandler.h"
 #include <Windows.h>
 
 using namespace ipgdlib::layout;

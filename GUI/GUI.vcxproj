@@ -19,22 +19,22 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Region\CAbsRegionOperationNot.h" />
     <ClInclude Include="Region\CAbsRegionOperationBinary.h" />
-    <ClInclude Include="Region\IRegionOperationBinary.h" />
-    <ClInclude Include="Region\IRegionOperationUnary.h" />
+    <ClInclude Include="Region\CAbsRegionOperationUnary.h" />
     <ClInclude Include="Region\CRegionOperationSubtraction.h" />
     <ClInclude Include="Mouse\CAbsDragable.h" />
     <ClInclude Include="Mouse\CDragManager.h" />
     <ClInclude Include="Mouse\CMouseHandler.h" />
     <ClInclude Include="Region\CRegionOperationIntersection.h" />
     <ClInclude Include="Region\CRegionOperationUnion.h" />
-    <ClInclude Include="Region\IRegionOperation.h" />
+    <ClInclude Include="Region\CAbsRegionOperation.h" />
     <ClInclude Include="Region\CRegionRectangle.h" />
     <ClInclude Include="CWindow.h" />
     <ClInclude Include="CWndApp.h" />
     <ClInclude Include="CWndClass.h" />
     <ClInclude Include="Mouse\IDragable.h" />
-    <ClInclude Include="Region\IRegion.h" />
+    <ClInclude Include="Region\CAbsRegion.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "IRegionOperationBinary.h"
+#include "CAbsRegionOperation.h"
 
 namespace ipgdlib
 {
@@ -8,36 +8,67 @@ namespace ipgdlib
 	{
 
 		template <typename T>
-		class CRegionOperationSubtraction :
-			public IRegionOperationBinary<T>
+		class CAbsRegionOperationBinary :
+			public CAbsRegionOperation<T>
 		{
 
 		public:
-			CRegionOperationSubtraction(const IRegion<T>& lhs, const IRegion<T>& rhs) :
-				m_Lhs(lhs), m_Rhs(rhs)
+			CAbsRegionOperationBinary(CAbsRegion<T>& lhs, CAbsRegion<T>& rhs) :
+				m_Lhs(lhs),m_Rhs(rhs)
 			{
 			}
 
-			const IRegion<T>& getLhs() const override
+			size_t getOperandCount() const override
+			{
+				return 2;
+			}
+
+			const CAbsRegion<T>& getOperand(size_t index) const override
+			{
+				switch (index)
+				{
+					case 0: return this->m_Lhs; break;
+					case 1: return this->m_Rhs; break;
+					default: throw std::invalid_argument("Index Out of Bound"); break;
+				}
+			}
+			
+			CAbsRegion<T>& getOperand(size_t index) override
+			{
+
+				switch (index)
+				{
+					case 0: return this->m_Lhs; break;
+					case 1: return this->m_Rhs; break;
+					default: throw std::invalid_argument("Index Out of Bound"); break;
+				}
+			}
+
+			const CAbsRegion<T>& getLhs() const
 			{
 				return this->m_Lhs;
 			}
 
-			const IRegion<T>& getRhs() const override
+			CAbsRegion<T>& getLhs()
+			{
+				return this->m_Lhs;
+			}
+
+			const CAbsRegion<T>& getRhs() const
 			{
 				return this->m_Rhs;
 			}
 
-			bool isPointInside(const Point& p) const override
+			CAbsRegion<T>& getRhs() 
 			{
-				return m_Lhs.isPointInside(p) && !m_Rhs.isPointInside(p);
+				return this->m_Rhs;
 			}
 
 		protected:
 
 		private:
-			const IRegion<T>& m_Lhs;
-			const IRegion<T>& m_Rhs;
+			CAbsRegion<T>& m_Lhs;
+			CAbsRegion<T>& m_Rhs;
 		};
 
 	}

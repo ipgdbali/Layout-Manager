@@ -1,6 +1,6 @@
 #pragma once
 
-#include "IRegion.h"
+#include "CAbsRegion.h"
 
 namespace ipgdlib
 {
@@ -9,7 +9,7 @@ namespace ipgdlib
 
 		template <typename T>
 		class CRegionRectangle :
-			public IRegion<T>
+			public CAbsRegion<T>
 		{
 			public:
 				using Rect = ipgdlib::geometry::SRect<T>;
@@ -20,7 +20,7 @@ namespace ipgdlib
 				{
 				}
 
-				const Rect& getRect() const override
+				const Rect& getRect() const
 				{
 					return this->m_Rect;
 				}

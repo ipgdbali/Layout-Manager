@@ -36,13 +36,13 @@
     <ClInclude Include="Mouse\CAbsDragable.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Region\IRegion.h">
+    <ClInclude Include="Region\CAbsRegion.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Region\CRegionRectangle.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Region\IRegionOperation.h">
+    <ClInclude Include="Region\CAbsRegionOperation.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Region\CRegionOperationUnion.h">
@@ -54,13 +54,13 @@
     <ClInclude Include="Region\CRegionOperationSubtraction.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Region\IRegionOperationUnary.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Region\IRegionOperationBinary.h">
+    <ClInclude Include="Region\CAbsRegionOperationUnary.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Region\CAbsRegionOperationBinary.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Region\CAbsRegionOperationNot.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
