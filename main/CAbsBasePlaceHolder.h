@@ -3,6 +3,9 @@
 #include "./../Geometry/SRect.h"
 #include "../Util/CCustomData.h"
 
+
+using namespace ipgdlib::util;
+
 namespace ipgdlib
 {
 	namespace layout

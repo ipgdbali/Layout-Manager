@@ -35,15 +35,16 @@ namespace ipgdlib
 
 		protected:
 
+			TChildType& getChildRef(size_t index) override
+			{
+				return m_Childs[index];
+			}
+
 			std::vector<TChildType>& getChilds()
 			{
 				return this->m_Childs;
 			}
 
-			TChildType &getChildRef(size_t index) override
-			{
-				return m_Childs[index];
-			}
 
 		private:
 			std::vector<TChildType> m_Childs;

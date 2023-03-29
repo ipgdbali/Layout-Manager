@@ -1,4 +1,8 @@
 #pragma once
+
+#include "IDragable.h"
+#include "../Region/CAbsRegion.h"
+
 namespace ipgdlib
 {
 	namespace os
@@ -17,11 +21,11 @@ namespace ipgdlib
 				}
 
 				virtual size_t getDragCount() const = 0;
-				virtual const IRegion &getDragRegion(size_t index) const = 0;
+				virtual const CAbsRegion<T> &getDragRegion(size_t index) const = 0;
 				virtual size_t getDragIndexFromPos(const Point& pos) const = 0;
 				virtual eAffectedAxis getDragAffectedAxis(size_t index) const = 0;
 				virtual void setDrag(size_t index, const Point& deltaPos) = 0;
-			protected:
+
 		};
 
 		template<typename T>

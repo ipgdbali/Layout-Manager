@@ -15,13 +15,13 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ISizeable.h">
+    <ClInclude Include="iface\ISizeable.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="IReCalculate.h">
+    <ClInclude Include="iface\IReCalculate.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="IAutoReCalculate.h">
+    <ClInclude Include="iface\IAutoReCalculate.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="CAbsAutoReCalculate.h">
@@ -36,7 +36,7 @@
     <ClInclude Include="CCustomData.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="IVector.h">
+    <ClInclude Include="iface\IVector.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="CVectorStatic.h">
@@ -45,10 +45,16 @@
     <ClInclude Include="CVectorDynamic.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="INullable.h">
+    <ClInclude Include="iface\INullable.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="CNullableT.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="iface\IVectorBase.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="iface\ICustomData.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

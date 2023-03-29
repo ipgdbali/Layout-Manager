@@ -134,11 +134,13 @@
     <ClInclude Include="CSizeableAutoReCalculate.h" />
     <ClInclude Include="CVectorDynamic.h" />
     <ClInclude Include="CVectorStatic.h" />
-    <ClInclude Include="IAutoReCalculate.h" />
-    <ClInclude Include="INullable.h" />
-    <ClInclude Include="IReCalculate.h" />
-    <ClInclude Include="ISizeable.h" />
-    <ClInclude Include="IVector.h" />
+    <ClInclude Include="iface\ICustomData.h" />
+    <ClInclude Include="iface\IAutoReCalculate.h" />
+    <ClInclude Include="iface\INullable.h" />
+    <ClInclude Include="iface\IReCalculate.h" />
+    <ClInclude Include="iface\ISizeable.h" />
+    <ClInclude Include="iface\IVector.h" />
+    <ClInclude Include="iface\IVectorBase.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
