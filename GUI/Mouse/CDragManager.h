@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../Geometry/SPoint.h"
+#include "../Util/Geometry/SPoint.h"
 
 namespace ipgdlib
 {

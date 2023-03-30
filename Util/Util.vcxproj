@@ -135,6 +135,10 @@
     <ClInclude Include="Container\CContainerIndexedDynamic.h" />
     <ClInclude Include="Container\CContainerIndexedStatic.h" />
     <ClInclude Include="Container\IContainerT.h" />
+    <ClInclude Include="Geometry\SPoint.h" />
+    <ClInclude Include="Geometry\SRange.h" />
+    <ClInclude Include="Geometry\SRect.h" />
+    <ClInclude Include="Geometry\SSize.h" />
     <ClInclude Include="iface\IAffectedAxis.h" />
     <ClInclude Include="Container\IContainer.h" />
     <ClInclude Include="iface\ICustomData.h" />

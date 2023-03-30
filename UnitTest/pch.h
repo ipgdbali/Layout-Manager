@@ -9,7 +9,7 @@
 
 // add headers that you want to pre-compile here
 #include <string>
-#include "../Geometry/SRect.h"
+#include "../Util/Geometry/SRect.h"
 
 namespace Microsoft
 {

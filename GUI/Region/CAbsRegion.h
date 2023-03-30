@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../../Geometry/SRect.h"
+#include "../../Util/Geometry/SRect.h"
 
 namespace ipgdlib
 {
