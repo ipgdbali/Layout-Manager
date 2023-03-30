@@ -12,14 +12,7 @@ namespace ipgdlib
 			virtual public ICustomData
 		{
 		public:
-			CCustomData() = default;
-
-			CCustomData(const T& customData)
-				: m_CustomData(customData)
-			{
-			}
-
-			CCustomData(T&& customData)
+			CCustomData(T customData)
 				: m_CustomData(std::move(customData))
 			{
 			}

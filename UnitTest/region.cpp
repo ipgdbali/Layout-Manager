@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "CppUnitTest.h"
-#include "../GUI/Region/CRegionRectangle.h"
-#include "../GUI/Region/CRegionOperationSubtraction.h"
+#include "../Util/Region/CRegionRectangle.h"
+#include "../Util/Region/CRegionOperationSubtraction.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
