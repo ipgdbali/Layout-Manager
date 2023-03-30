@@ -132,17 +132,18 @@
     <ClInclude Include="CNullableT.h" />
     <ClInclude Include="CSizeable.h" />
     <ClInclude Include="CSizeableAutoReCalculate.h" />
-    <ClInclude Include="CVectorDynamic.h" />
-    <ClInclude Include="CVectorStatic.h" />
+    <ClInclude Include="Container\CContainerIndexedDynamic.h" />
+    <ClInclude Include="Container\CContainerIndexedStatic.h" />
+    <ClInclude Include="Container\IContainerT.h" />
     <ClInclude Include="iface\IAffectedAxis.h" />
-    <ClInclude Include="iface\ICollection.h" />
+    <ClInclude Include="Container\IContainer.h" />
     <ClInclude Include="iface\ICustomData.h" />
     <ClInclude Include="iface\IAutoReCalculate.h" />
     <ClInclude Include="iface\INullable.h" />
     <ClInclude Include="iface\IReCalculate.h" />
     <ClInclude Include="iface\ISizeable.h" />
-    <ClInclude Include="iface\IVector.h" />
-    <ClInclude Include="iface\ICollectionKind.h" />
+    <ClInclude Include="Container\IContainerIndexed.h" />
+    <ClInclude Include="Container\IContainerKind.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

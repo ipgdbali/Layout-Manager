@@ -58,9 +58,9 @@ namespace ipgdlib
                     );
             }
 
-            eCollectionKind getCollectionKind() const override
+            eContainerKind getContainerKind() const override
             {
-                return eCollectionKind::Static;
+                return eContainerKind::Static;
             }
 
             size_t getChildCount() const override
@@ -75,7 +75,7 @@ namespace ipgdlib
 
         protected:
 
-            std::array<child_item_type, n> &getVector()
+            std::array<child_item_type, n> &getContainer()
             {
                 return this->m_Childs;
             }

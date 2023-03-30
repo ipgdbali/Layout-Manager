@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../../Util/iface/ICollectionKind.h"
+#include "../../Util/iface/IContainerKind.h"
 #include "CAbsDragable.h"
 #include <vector>
 
@@ -20,8 +20,8 @@ namespace ipgdlib
 			{
 			}
 
-			eCollectionKind getCollectionKind() const override {
-				return eCollectionKind::Dynamic;
+			eContainerKind getContainerKind() const override {
+				return eContainerKind::Dynamic;
 			}
 
 			size_t getDragCount() const override {

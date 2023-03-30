@@ -2,7 +2,7 @@
 
 #include "CAbsBasePlaceHolder.h"
 #include "../Util/CAbsAutoReCalculate.h"
-#include "../Util/iface/ICollectionKind.h"
+#include "../Util/Container/IContainerKind.h"
 #include "../Util/iface/IAffectedAxis.h"
 #include <vector>
 
@@ -13,12 +13,11 @@ namespace ipgdlib
 
         using namespace ipgdlib::util;
 
-
         template <typename T>
         class CAbsBasePlaceHolder<T>::CAbsBaseManager :
             public CAbsBasePlaceHolder<T>,
             public CAbsAutoReCalculate,
-            public ICollectionKind,
+            public IContainerKind,
             public IAffectedAxis
         {
 
@@ -50,10 +49,11 @@ namespace ipgdlib
 
             virtual CAbsBasePlaceHolder<T>* const & getChildPlaceHolder(size_t index) const = 0;
 
-            virtual void setChildPlaceHolder(size_t index, CAbsBasePlaceHolder<T>* const pChildPlaceHolder)
-            {
+            virtual void setChildPlaceHolder(size_t index, CAbsBasePlaceHolder<T>* const pChildPlaceHolder){
+
                 if (pChildPlaceHolder)
                 {
+
                     CAbsBasePlaceHolder<T>* &pInternal = this->getChildPlaceHolderRef(index);
                     if (pInternal != nullptr)
                     {
@@ -62,12 +62,9 @@ namespace ipgdlib
                     }
                     pInternal = pChildPlaceHolder;
                     setChildParent(pInternal);
+                
                 }
-            }
 
-            bool setChildPlaceHolders(std::vector< CAbsBasePlaceHolder<T>* > pChildPlaceHolders)
-            {
-                throw "Not Implemented Yet";
             }
 
         protected:

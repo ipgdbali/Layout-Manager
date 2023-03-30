@@ -36,13 +36,13 @@
     <ClInclude Include="CCustomData.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="iface\IVector.h">
+    <ClInclude Include="Container\IContainerIndexed.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CVectorStatic.h">
+    <ClInclude Include="Container\CContainerIndexedStatic.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CVectorDynamic.h">
+    <ClInclude Include="Container\CContainerIndexedDynamic.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="iface\INullable.h">
@@ -51,16 +51,19 @@
     <ClInclude Include="CNullableT.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="iface\ICollectionKind.h">
+    <ClInclude Include="Container\IContainerKind.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="iface\ICustomData.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="iface\ICollection.h">
+    <ClInclude Include="Container\IContainer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="iface\IAffectedAxis.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Container\IContainerT.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

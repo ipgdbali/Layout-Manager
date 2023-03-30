@@ -115,7 +115,7 @@ namespace ipgdlib
 
             void setChild(size_t index,child_item_type child) override
             {
-                this->setChildPlaceHolder(index, child.second);
+                this->setChildPlaceHolder(index, std::move(child.second));
                 this->setChildItem(index, std::move(child.first));
             }
 

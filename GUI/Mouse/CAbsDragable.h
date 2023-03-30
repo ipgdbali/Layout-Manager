@@ -1,7 +1,7 @@
 #pragma once
 
 #include "IDragable.h"
-#include "../../Util/iface/ICollectionKind.h"
+#include "../../Util/iface/IContainerKind.h"
 #include "../Region/CAbsRegion.h"
 
 namespace ipgdlib
@@ -19,7 +19,7 @@ namespace ipgdlib
 		template <typename T, bool bDragable>
 		class CAbsDragable :
 			public IDragable,
-			public ICollectionKind
+			public IContainerKind
 
 		{
 			public:
