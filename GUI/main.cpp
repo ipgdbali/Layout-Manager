@@ -1,5 +1,5 @@
-#include "CWndApp.h"
-#include "CWndClass.h"
+#include "../Util/Win32/CWndApp.h"
+#include "../Util/Win32/CWndClass.h"
 #include <Windows.h>
 #include <tchar.h>
 

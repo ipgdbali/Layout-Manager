@@ -1,5 +1,5 @@
-#include "../GUI/CWndApp.h"
-#include "../GUI/CWndClass.h"
+#include "../Util/Win32/CWndApp.h"
+#include "../Util/Win32/CWndClass.h"
 #include "../main/CPlaceHolder.h"
 #include "../main/CAbsManager.h"
 #include "../main/CLMPadder.h"

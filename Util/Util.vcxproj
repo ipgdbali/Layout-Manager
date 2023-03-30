@@ -148,6 +148,9 @@
     <ClInclude Include="iface\ISizeable.h" />
     <ClInclude Include="Container\IContainerIndexed.h" />
     <ClInclude Include="Container\IContainerKind.h" />
+    <ClInclude Include="Win32\CWindow.h" />
+    <ClInclude Include="Win32\CWndApp.h" />
+    <ClInclude Include="Win32\CWndClass.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

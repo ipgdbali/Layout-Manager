@@ -32,9 +32,6 @@
     <ClInclude Include="Region\CRegionOperationUnion.h" />
     <ClInclude Include="Region\CAbsRegionOperation.h" />
     <ClInclude Include="Region\CRegionRectangle.h" />
-    <ClInclude Include="CWindow.h" />
-    <ClInclude Include="CWndApp.h" />
-    <ClInclude Include="CWndClass.h" />
     <ClInclude Include="Mouse\IDragable.h" />
     <ClInclude Include="Region\CAbsRegion.h" />
   </ItemGroup>

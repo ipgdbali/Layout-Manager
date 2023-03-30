@@ -18,15 +18,6 @@
     <ClInclude Include="Mouse\CDragManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CWindow.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="CWndApp.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="CWndClass.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Mouse\CMouseHandler.h">
       <Filter>Header Files</Filter>
     </ClInclude>

@@ -78,5 +78,14 @@
     <ClInclude Include="Geometry\SSize.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Win32\CWindow.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Win32\CWndApp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Win32\CWndClass.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
