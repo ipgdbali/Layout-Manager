@@ -108,15 +108,15 @@ namespace ipgdlib
                 return this->getChild(index).first;
             }
 
+            virtual void setChildItem(size_t index, TChildItem item)
+            {
+                this->getChildItemRef(index) = std::move(item);
+            }
+
             void setChild(size_t index,child_item_type child) override
             {
                 this->setChildPlaceHolder(index, child.second);
                 this->setChildItem(index, std::move(child.first));
-            }
-
-            virtual void setChildItem(size_t index,TChildItem item)
-            {
-                this->getChildItemRef(index) = std::move(item);
             }
 
         protected:

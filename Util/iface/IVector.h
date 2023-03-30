@@ -7,15 +7,17 @@ namespace ipgdlib
 	namespace util
 	{
 
-		template <typename TChildType>
+		template <typename TItemType>
 		class IVector :
-			public IVectorBase
+			virtual public IVectorBase,
+			virtual public ICollection
+
 		{
 			public:
-				virtual const TChildType& getChild(size_t index) const = 0;
+				virtual const TChildType& getItem(size_t index) const = 0;
 
 			protected:
-				virtual TChildType& getChildRef() = 0;
+				virtual TChildType& getItemRef() = 0;
 		};
 
 	}

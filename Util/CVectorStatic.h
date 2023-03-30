@@ -7,46 +7,46 @@ namespace ipgdlib
 {
 	namespace util
 	{
-		template <typename TChildType,size_t n>
+		template <typename TItemType,size_t n>
 		class CVectorStatic :
-			public IVector<TChildType>
+			public IVector<TItemType>
 		{
 			public:
-				CVectorStatic(std::array<TChildType,n> init) :
-					m_Childs(std::move(init))
+				CVectorStatic(std::array<TItemType,n> init) :
+					m_Items(std::move(init))
 				{
 
 				}
 
-				eVectorKind getVectorKind() const override
+				eCollectionKind getCollectionKind() const override
 				{
-					return eVectorKind::Static;
+					return eCollectionKind::Static;
 				}
 
-				size_t getChildCount() const override
+				size_t getItemCount() const override
 				{
 					return n;
 				}
 
-				const TChildType& getChild(size_t index) const override
+				const TItemType& getItem(size_t index) const override
 				{
-					return m_Childs[index];
+					return m_Items[index];
 				}
 
 			protected:
 
-				std::array<TChildType,n> &getChilds()
+				std::array<TItemType,n> &getItems()
 				{
-					return this->m_Childs;
+					return this->m_Items;
 				}
 
-				TChildType& getChildRef(size_t index) override
+				TItemType& getItemRef(size_t index) override
 				{
-					return m_Childs[index];
+					return m_Items[index];
 				}
 
 			private:
-				std::array<TChildType, n> m_Childs;
+				std::array<TItemType, n> m_Items;
 
 		};
 

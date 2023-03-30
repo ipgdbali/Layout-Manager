@@ -2,6 +2,8 @@
 
 #include "CAbsBasePlaceHolder.h"
 #include "../Util/CAbsAutoReCalculate.h"
+#include "../Util/iface/ICollectionKind.h"
+#include "../Util/iface/IAffectedAxis.h"
 #include <vector>
 
 namespace ipgdlib
@@ -11,13 +13,13 @@ namespace ipgdlib
 
         using namespace ipgdlib::util;
 
-        enum class eAffectedAxis { Horizontal, Vertical, Both };
-        enum class eVectorKind { Static,Dynamic };
 
         template <typename T>
         class CAbsBasePlaceHolder<T>::CAbsBaseManager :
             public CAbsBasePlaceHolder<T>,
-            public CAbsAutoReCalculate
+            public CAbsAutoReCalculate,
+            public ICollectionKind,
+            public IAffectedAxis
         {
 
         public:
@@ -30,10 +32,6 @@ namespace ipgdlib
             {
             }
 
-            virtual eAffectedAxis getAffectedAxis() const = 0;
-
-            virtual eVectorKind getVectorKind() const = 0;
-
             bool isManager() const override final
             {
                 return true;
@@ -42,7 +40,7 @@ namespace ipgdlib
             size_t getChildIndexFromPoint(const Point& p) const
             {
                 for (size_t li = 0; li < this->getChildCount(); li++)
-                    if (this->getChildPlaceHolder(li)->getRect().isPointInRect(p))
+                    if (this->getChildPlaceHolder(li)->getRect().isPointInside(p))
                         return li;
 
                 return (size_t)-1;

@@ -1,19 +1,32 @@
 #pragma once
 
 #include "IDragable.h"
+#include "../../Util/iface/ICollectionKind.h"
 #include "../Region/CAbsRegion.h"
 
 namespace ipgdlib
 {
 	namespace os
 	{
+
+		struct SDragInfo
+		{
+			CAbsRegion<T>* dragRegion;
+			eAffectedAxis affectedAxis;
+		};
+
+
 		template <typename T, bool bDragable>
 		class CAbsDragable :
-			public IDragable
+			public IDragable,
+			public ICollectionKind
+
 		{
 			public:
+
 				using Rect = ipgdlib::geometry::SRect<T>;
 				using Point = ipgdlib::geometry::SPoint<T>;
+
 
 				bool isDragable() const override
 				{
@@ -21,10 +34,10 @@ namespace ipgdlib
 				}
 
 				virtual size_t getDragCount() const = 0;
-				virtual const CAbsRegion<T> &getDragRegion(size_t index) const = 0;
-				virtual size_t getDragIndexFromPos(const Point& pos) const = 0;
-				virtual eAffectedAxis getDragAffectedAxis(size_t index) const = 0;
-				virtual void setDrag(size_t index, const Point& deltaPos) = 0;
+				virtual const SDragInfo& getDragInfo(size_t index) const = 0;
+
+			protected:
+				virtual SDragInfo& getDragInfo()  = 0;
 
 		};
 

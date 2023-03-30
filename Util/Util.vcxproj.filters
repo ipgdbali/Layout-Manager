@@ -51,10 +51,16 @@
     <ClInclude Include="CNullableT.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="iface\IVectorBase.h">
+    <ClInclude Include="iface\ICollectionKind.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="iface\ICustomData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="iface\ICollection.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="iface\IAffectedAxis.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

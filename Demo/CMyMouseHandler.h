@@ -165,7 +165,7 @@ protected:
 		CAbsBasePlaceHolder<T>* tmp = m_pRoot;
 		bool bFoundPlaceHolder = false;
 
-		while(tmp->isPointInside(pos))
+		while(tmp->getRect().isPointInside(pos))
 		{
 			if (tmp->isManager())
 			{
@@ -173,7 +173,7 @@ protected:
 				typename CAbsBasePlaceHolder<T>::CAbsBaseManager* tmp2 = dynamic_cast<typename CAbsBasePlaceHolder<T>::CAbsBaseManager*>(tmp);
 				for (size_t li = 0; li < tmp2->getChildCount(); li++)
 				{
-					if (tmp2->getChildPlaceHolder(li)->isPointInside(pos))
+					if (tmp2->getChildPlaceHolder(li)->getRect().isPointInside(pos))
 					{
 						tmp = tmp2->getChildPlaceHolder(li);
 						bFoundPlaceHolder = true;

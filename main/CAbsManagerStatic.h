@@ -58,9 +58,9 @@ namespace ipgdlib
                     );
             }
 
-            eVectorKind getVectorKind() const override
+            eCollectionKind getCollectionKind() const override
             {
-                return eVectorKind::Static;
+                return eCollectionKind::Static;
             }
 
             size_t getChildCount() const override

@@ -28,11 +28,6 @@ namespace ipgdlib
 
             virtual bool isManager() const = 0;
 
-            bool isPointInside(const Point& p) const
-            {
-                return this->m_Rect.isPointInRect(p);
-            }
-
             const Rect& getRect() const
             {
                 return this->m_Rect;
@@ -54,7 +49,7 @@ namespace ipgdlib
             }
 
         protected:
-            virtual void onChangeRect(Rect& r, Rect && nr)
+            virtual void onChangeRect(Rect & r, Rect && nr)
             {
                 r = std::move(nr);
             }

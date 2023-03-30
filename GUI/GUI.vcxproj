@@ -19,6 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Mouse\CAbsDragableDynamic.h" />
+    <ClInclude Include="Mouse\CAbsDragableStatic.h" />
     <ClInclude Include="Region\CAbsRegionOperationNot.h" />
     <ClInclude Include="Region\CAbsRegionOperationBinary.h" />
     <ClInclude Include="Region\CAbsRegionOperationUnary.h" />

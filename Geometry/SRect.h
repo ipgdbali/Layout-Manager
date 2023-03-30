@@ -84,7 +84,7 @@ namespace ipgdlib
 				return r;
 			}
 
-			bool isPointInRect(const SPoint<T> &p) const
+			bool isPointInside(const SPoint<T> &p) const
 			{
 				if (this->left <= p.x && p.x <= this->right && this->top <= p.y && p.y <= this->bottom)
 					return true;

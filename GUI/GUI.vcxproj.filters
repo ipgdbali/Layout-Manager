@@ -63,6 +63,12 @@
     <ClInclude Include="Region\CAbsRegionOperationNot.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Mouse\CAbsDragableStatic.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Mouse\CAbsDragableDynamic.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">

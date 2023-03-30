@@ -25,9 +25,14 @@ namespace ipgdlib
 					return this->m_Rect;
 				}
 
+				void setRect(Rect r)
+				{
+					this->m_Rect = std::move(r);
+				}
+
 				bool isPointInside(const Point& p) const override
 				{
-					return this->m_Rect.isPointInRect(p);
+					return this->m_Rect.isPointInside(p);
 				}
 			
 			private:

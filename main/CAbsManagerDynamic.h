@@ -52,9 +52,9 @@ namespace ipgdlib
                     );
             }
 
-            eVectorKind getVectorKind() const override
+            eCollectionKind getCollectionKind() const override
             {
-                return eVectorKind::Dynamic;
+                return eCollectionKind::Dynamic;
             }
 
             size_t getChildCount() const override
