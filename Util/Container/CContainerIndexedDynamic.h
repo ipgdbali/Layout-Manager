@@ -5,7 +5,7 @@
 
 namespace ipgdlib
 {
-	namespace util
+	namespace container
 	{
 
 		template <typename TChildType>
@@ -13,46 +13,47 @@ namespace ipgdlib
 			virtual public IContainerT< std::vector<TItemType> >,
 			virtual public IContainerIndexed<TChildType>
 		{
-		public:
-			CVectorDynamic(std::vector<TChildType> v) : 
-				m_Container(std::move(v))
-			{
-			}
 
-			eContainerKind getContainerKind() const override
-			{
-				return eContainerKind::Dynamic;
-			}
+			public:
+				CVectorDynamic(std::vector<TChildType> v) : 
+					m_Container(std::move(v))
+				{
+				}
 
-			size_t getChildCount() const override
-			{
-				return m_Container.size();
-			}
+				eContainerKind getContainerKind() const override
+				{
+					return eContainerKind::Dynamic;
+				}
 
-			const TChildType& getChild(size_t index) const override
-			{
-				return m_Container[index];
-			}
+				size_t getChildCount() const override
+				{
+					return m_Container.size();
+				}
 
-		protected:
+				const TChildType& getChild(size_t index) const override
+				{
+					return m_Container[index];
+				}
 
-			TChildType& getChildRef(size_t index) override
-			{
-				return m_Container[index];
-			}
+			protected:
 
-			const std::vector<TChildType>& getContainer() const override
-			{
-				return this->m_Container;
-			}
+				TChildType& getChildRef(size_t index) override
+				{
+					return m_Container[index];
+				}
 
-			std::vector<TChildType>& getContainer() override
-			{
-				return this->m_Container;
-			}
+				const std::vector<TChildType>& getContainer() const override
+				{
+					return this->m_Container;
+				}
 
-		private:
-			std::vector<TChildType> m_Container;
+				std::vector<TChildType>& getContainer() override
+				{
+					return this->m_Container;
+				}
+
+			private:
+				std::vector<TChildType> m_Container;
 
 		};
 

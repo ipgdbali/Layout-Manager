@@ -128,6 +128,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="CAbsAutoReCalculate.h" />
+    <ClInclude Include="Mouse\CAbsDragable.h" />
     <ClInclude Include="CCustomData.h" />
     <ClInclude Include="CNullableT.h" />
     <ClInclude Include="CSizeable.h" />
@@ -139,6 +140,7 @@
     <ClInclude Include="Geometry\SRange.h" />
     <ClInclude Include="Geometry\SRect.h" />
     <ClInclude Include="Geometry\SSize.h" />
+    <ClInclude Include="Container\IContainerIndexedOrderable.h" />
     <ClInclude Include="iface\IAffectedAxis.h" />
     <ClInclude Include="Container\IContainer.h" />
     <ClInclude Include="iface\ICustomData.h" />
@@ -148,6 +150,22 @@
     <ClInclude Include="iface\ISizeable.h" />
     <ClInclude Include="Container\IContainerIndexed.h" />
     <ClInclude Include="Container\IContainerKind.h" />
+    <ClInclude Include="Container\CIndexedChild.h" />
+    <ClInclude Include="Mouse\CAbsDragableBase.h" />
+    <ClInclude Include="Mouse\CAbsDragableDynamic.h" />
+    <ClInclude Include="Mouse\CAbsDragableStatic.h" />
+    <ClInclude Include="Mouse\CDragManager.h" />
+    <ClInclude Include="Mouse\CMouseHandler.h" />
+    <ClInclude Include="Mouse\IDragable.h" />
+    <ClInclude Include="Region\CAbsRegion.h" />
+    <ClInclude Include="Region\CAbsRegionOperation.h" />
+    <ClInclude Include="Region\CAbsRegionOperationBinary.h" />
+    <ClInclude Include="Region\CAbsRegionOperationNot.h" />
+    <ClInclude Include="Region\CAbsRegionOperationUnary.h" />
+    <ClInclude Include="Region\CRegionOperationIntersection.h" />
+    <ClInclude Include="Region\CRegionOperationSubtraction.h" />
+    <ClInclude Include="Region\CRegionOperationUnion.h" />
+    <ClInclude Include="Region\CRegionRectangle.h" />
     <ClInclude Include="Win32\CWindow.h" />
     <ClInclude Include="Win32\CWndApp.h" />
     <ClInclude Include="Win32\CWndClass.h" />

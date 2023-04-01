@@ -1,7 +1,7 @@
 #pragma once
 namespace ipgdlib
 {
-	namespace util
+	namespace container
 	{
 		enum class eContainerKind { Static, Dynamic };
 

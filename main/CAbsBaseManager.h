@@ -4,6 +4,7 @@
 #include "../Util/CAbsAutoReCalculate.h"
 #include "../Util/Container/IContainerKind.h"
 #include "../Util/iface/IAffectedAxis.h"
+#include "../Util/Mouse/IDragable.h"
 #include <vector>
 
 namespace ipgdlib
@@ -11,12 +12,13 @@ namespace ipgdlib
 	namespace layout
 	{
 
-        using namespace ipgdlib::util;
+        using namespace ipgdlib::container;
 
         template <typename T>
         class CAbsBasePlaceHolder<T>::CAbsBaseManager :
             public CAbsBasePlaceHolder<T>,
             public CAbsAutoReCalculate,
+            virtual public ipgdlib::os::IDragable,
             public IContainerKind,
             public IAffectedAxis
         {

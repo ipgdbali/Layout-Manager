@@ -9,9 +9,12 @@ namespace ipgdlib
 	namespace os
 	{
 
-		template <typename T>
+		template <
+			typename T,
+			typename U
+		>
 		class CAbsDragAbleDynamic :
-			public CAbsDragable<T, true>,
+			public CAbsDragable<T,U>,
 		{
 		public:
 

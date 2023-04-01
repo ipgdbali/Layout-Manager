@@ -63,9 +63,9 @@ static LRESULT Wndproc(
 												new CPanelBar<int>(),
 												new CLMDividerVert<int>(5,
 													{
-														{1,new CPanelBar<int>()},
-														{2,new CPanelTool<int>()},
-														{1,new CPanelBar<int>()}
+														{1,new CPanelTool<int>()},
+														{2,new CPanelBar<int>()},
+														{1,new CPanelTool<int>()}
 													})
 											})
 									})

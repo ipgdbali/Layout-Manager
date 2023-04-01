@@ -5,7 +5,7 @@
 
 namespace ipgdlib
 {
-	namespace util
+	namespace container
 	{
 
 		template <typename TChildType,size_t n>
@@ -13,6 +13,7 @@ namespace ipgdlib
 			virtual public IContainerT<std::array<TChildType,n>>,
 			virtual public IContainerIndexed<TChildType>
 		{
+
 			public:
 				IContainerIndexedStatic(std::array<TChildType,n> init) :
 					m_Container(std::move(init))

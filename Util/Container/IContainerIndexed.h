@@ -5,7 +5,7 @@
 
 namespace ipgdlib
 {
-	namespace util
+	namespace container
 	{
 
 		template <typename TChildType>
@@ -13,11 +13,13 @@ namespace ipgdlib
 			virtual public IContainer
 			virtual public IContainerKind,
 		{
+
 			public:
 				virtual const TChildType& getChild(size_t index) const = 0;
 
 			protected:
 				virtual TChildType& getChildRef(size_t index) = 0;
+		
 		};
 
 	}

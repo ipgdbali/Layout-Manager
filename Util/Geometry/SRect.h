@@ -137,12 +137,22 @@ namespace ipgdlib
 				return { left + r.left,top + r.top,right - r.right,bottom - r.bottom };
 			}
 
-			SRect<T> horzRePosition(const SRange<T>& p) const
+			SRect<T> horzRePositionLeft(const SRange<T>& p) const
 			{
 				return { this->left + p.a,this->top,this->left + p.b,this->bottom };
 			}
 
-			SRect<T> vertRePosition(const SRange<T>& p) const
+			SRect<T> vertRePositionTop(const SRange<T>& p) const
+			{
+				return { this->left,this->top + p.a,this->right,this->top + p.b };
+			}
+
+			SRect<T> horzRePositionRight(const SRange<T>& p) const
+			{
+				return { this->right - p.a,this->top,this->right - p.b,this->bottom };
+			}
+
+			SRect<T> vertRePositionBottom(const SRange<T>& p) const
 			{
 				return { this->left,this->top + p.a,this->right,this->top + p.b };
 			}

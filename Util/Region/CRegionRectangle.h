@@ -15,6 +15,11 @@ namespace ipgdlib
 				using Rect = ipgdlib::geometry::SRect<T>;
 				using Point = ipgdlib::geometry::SPoint<T>;
 				
+				CRegionRectangle() :
+					m_Rect(0)
+				{
+				}
+
 				CRegionRectangle(Rect r) :
 					m_Rect(std::move(r))
 				{

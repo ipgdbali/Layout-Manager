@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../../Util/iface/IContainerKind.h"
+#include "../Container/IContainerKind.h"
 #include "CAbsDragable.h"
 
 namespace ipgdlib
@@ -8,51 +8,61 @@ namespace ipgdlib
 	namespace os
 	{
 
-		template <typename T,size_t n>
+		template <
+			typename T,
+			typename U,
+			size_t n
+		>
 		class CAbsDragAbleStatic :
-			public CAbsDragable<T,true>
+			public CAbsDragable<T,U>
 		{
 		public:
-			CAbsDragAbleStatic(std::array<SDragInfo,n> arrDragInfo) :
-				CAbsDragable<T, true>(),
-				m_arrDragInfo(std::move(arrDragInfo))
+			CAbsDragAbleStatic(bool def, std::array<SDragInfo<T>, n> dragInfo) :
+				CAbsDragable<T, U>(def),
+				m_Collection(std::move(dragInfo))
 			{
 			}
 
-			eContainerKind getContainerKind() const override {
-				return eContainerKind::Static;
+			CAbsDragAbleStatic(bool def) :
+				CAbsDragable<T, U>(def),
+				m_Collection()
+			{
+			}
+
+			ipgdlib::container::eContainerKind getContainerKind() const override {
+				return ipgdlib::container::eContainerKind::Static;
 			}
 			
 			size_t getDragCount() const override {
 				return n;
 			}
 
-			const SDragInfo& getDragInfo(size_t index) const override {
-				return this->m_arrDragInfo[index];
+			const SDragInfo<T>& getDragInfo(size_t index) const override {
+				return this->m_Collection[index];
 			}
 
-			size_t getDragIndexFromPoint(Point p) {
+			size_t getDragIndexFromPoint(ipgdlib::geometry::SPoint<U> p) {
 
-				for (int li = 0; li < m_arrDragInfo; li++)
-					if (m_arrDragInfo[li].dragRegion->isPointInside(p))
+				for (int li = 0; li < m_Collection; li++)
+					if (m_Collection[li].dragRegion->isPointInside(p))
 						return li;
 
 				return (size_t)-1;
 			}
 
 		protected:
-			std::array<SDragInfo,n> &getItemsRef() {
-				return this->m_arrDragInfo;
+			std::array<SDragInfo<T>,n> &getCollectionRef() {
+				return this->m_Collection;
 			}
 			
-			SDragInfo& getDragInfoRef(size_t index) override {
-				return this->m_arrDragInfo[index];
+			SDragInfo<T>& getDragInfoRef(size_t index) override {
+				return this->m_Collection[index];
 			}
 
 		protected:
 
 		private:
-			std::array<SDragInfo, n> m_arrDragInfo;
+			std::array<SDragInfo<T>, n> m_Collection;
 
 		};
 

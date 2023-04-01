@@ -55,7 +55,6 @@ namespace ipgdlib
 					this->autoReCalculate();
 				}
 
-
 				void reCalculate() override
 				{
 

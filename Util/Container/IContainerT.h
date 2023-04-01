@@ -4,7 +4,7 @@
 
 namespace ipgdlib{
 
-	namespace util {
+	namespace container {
 
 		template <typename TContainer>
 		class IContainerT :

@@ -7,9 +7,11 @@ namespace ipgdlib
 
 		class IAffectedAxis
 		{
+
 		public:
 			virtual ~IAffectedAxis() {};
 			virtual eAffectedAxis getAffectedAxis() const = 0;
+		
 		};
 
 	}

@@ -6,6 +6,7 @@ namespace ipgdlib
 
 		struct INullable
 		{
+			virtual ~INullable() = 0;
 			virtual bool isNull() const = 0;
 		};
 
