@@ -18,6 +18,7 @@ namespace ipgdlib
         class CAbsBasePlaceHolder<T>::CAbsBaseManager :
             public CAbsBasePlaceHolder<T>,
             public CAbsAutoReCalculate,
+            public CIndexedChild::CIndexedChildMutator,
             virtual public ipgdlib::os::IDragable,
             public IContainerKind,
             public IAffectedAxis
@@ -29,7 +30,8 @@ namespace ipgdlib
 
             CAbsBaseManager() :
                 CAbsBasePlaceHolder<T>(), 
-                CAbsAutoReCalculate()
+                CAbsAutoReCalculate(),
+                CIndexedChild::CIndexedChildMutator()
             {
             }
 
@@ -66,7 +68,6 @@ namespace ipgdlib
                     setChildParent(pInternal);
                 
                 }
-
             }
 
         protected:

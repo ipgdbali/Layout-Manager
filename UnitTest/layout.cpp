@@ -64,10 +64,39 @@ namespace LayoutManagerTest
 
 				CAbsBasePlaceHolder<int> *phA = new CPlaceHolder<int>();
 				CAbsBasePlaceHolder<int> *phB = new CPlaceHolder<int>();
+				
+				Assert::AreEqual<bool>(phA->getChildIndex(), 0);
+				Assert::AreEqual<bool>(phB->getChildIndex(), 0);
+
+				Assert::AreEqual<bool>(phA->isManager(), false);
+				Assert::AreEqual<bool>(phB->isManager(), false);
+
+				Assert::AreEqual<ipgdlib::geometry::SRect<int>>(phA->getRect(), { 0,0,0,0 });
+				Assert::AreEqual<ipgdlib::geometry::SRect<int>>(phB->getRect(), { 0,0,0,0 });
+
+				Assert::AreEqual<bool>(phA->hasParent(), false);
+				Assert::AreEqual<bool>(phB->hasParent(), false);
+
+				Assert::AreEqual<void*>(phA->getParent(), nullptr);
+				Assert::AreEqual<void*>(phB->getParent(), nullptr);
 
 				CLMSplitterHorz<int,eSplitterKind::eFixedScaled> splitter(100, 5,{phA,phB});
 
+				Assert::AreEqual<bool>(splitter.isManager(), true);
+				Assert::AreEqual<size_t>(splitter.getChildCount(), 2);
+
+				Assert::AreEqual<bool>(phA->getChildIndex(), 0);
+				Assert::AreEqual<bool>(phB->getChildIndex(), 1);
+
+				Assert::AreEqual<bool>(phA->hasParent(), true);
+				Assert::AreEqual<bool>(phB->hasParent(), true);
+
+				Assert::AreEqual<void*>(phA->getParent(), &splitter);
+				Assert::AreEqual<void*>(phB->getParent(), &splitter);
+
+
 				splitter.changeRect({ 0,0,499,499});
+
 				Assert::AreEqual<void*>(splitter.getFixedPlaceHolder(), phA);
 				Assert::AreEqual<void*>(splitter.getScaledPlaceHolder(), phB);
 
@@ -79,6 +108,10 @@ namespace LayoutManagerTest
 						splitter.getDragInfo(0).dragRegion
 					)->getRect(), {100,0,104,499});
 				Assert::AreEqual<ipgdlib::geometry::SRect<int>>(phB->getRect(), { 105,0,499,499 });
+
+				Assert::AreEqual<size_t>(splitter.getChildIndexFromPoint({ 50, 50 }), 0);
+				Assert::AreEqual<size_t>(splitter.getChildIndexFromPoint({ 100, 100 }), -1);
+				Assert::AreEqual<size_t>(splitter.getChildIndexFromPoint({ 200,200 }), 1);
 
 				splitter.setDrag(0, { 5,0 });
 

@@ -33,9 +33,10 @@ namespace ipgdlib
                 m_Childs(std::move(childs))
             {
                 for (size_t li = 0; li < n; li++)
-                    CAbsManager<T, TCustomData, TChildItem>::setChildParent(
-                        this->getChildPlaceHolder(li)
-                    );
+                {
+                    this->setChildIndex(*this->getChildPlaceHolder(li), li);
+                    this->setChildParent(this->getChildPlaceHolder(li));
+                }
             }
 
             template <
@@ -53,9 +54,10 @@ namespace ipgdlib
                 m_Childs(std::move(childs))
             {
                 for (size_t li = 0; li < n; li++)
-                    CAbsManager<T, TCustomData, TChildItem>::setChildParent(
-                        this->getChildPlaceHolder(li)
-                    );
+                {
+                    this->setChildIndex(*this->getChildPlaceHolder(li), li);
+                    this->setChildParent(this->getChildPlaceHolder(li));
+                }
             }
 
             eContainerKind getContainerKind() const override

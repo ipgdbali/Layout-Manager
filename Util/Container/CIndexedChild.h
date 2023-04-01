@@ -2,57 +2,42 @@
 
 namespace ipgdlib
 {
-	namespace container
+	namespace util
 	{
 
-		template <typename T>
-		class CIndexedChild
+		namespace container
 		{
 
-		public:
-
-			class CIndexedChildMutable
+			class CIndexedChild
 			{
-				public:
-					CIndexedChildMutable(CIndexedChild<T> & ref) :
-						m_IndexedChild(&ref)
-					{
-					}
 
-					void setIndexedChild(CIndexedChild<T>& ref)
-					{
-						this->m_IndexedChild = &ref;
-					}
+			public:
 
-					T getIndex() const
-					{
-						return this->m_IndexedChild->getIndex();
-					}
+				class CIndexedChildMutator
+				{
+					protected:
+						void setChildIndex(CIndexedChild & child,size_t childIndex) const
+						{
+							child.m_ChildIndex = childIndex;
+						}
+				};
 
-					void setIndex(T index) consts
-					{
-						m_IndexedChild->setIndex(index);
-					}
+				CIndexedChild() :
+					m_ChildIndex(0)
+				{
+				}
 
-				private:
-					CIndexedChild<T>* m_IndexedChild;
+				size_t getChildIndex() const
+				{
+					return this->m_ChildIndex;
+				}
+
+			private:
+				size_t m_ChildIndex;
+
 			};
 
-			T getIndex() const
-			{
-				return this->m_Index;
-			}
-		
-
-		protected:
-			void setIndex(T index)
-			{
-				return this->m_Index = std::move(index);
-			}
-
-		private:
-			T m_Index;
-		};
+		}
 
 	}
 }

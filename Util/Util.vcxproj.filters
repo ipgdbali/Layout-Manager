@@ -141,5 +141,11 @@
     <ClInclude Include="Mouse\CAbsDragable.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ISizeAutonomy.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CAbsSizeAutonomy.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

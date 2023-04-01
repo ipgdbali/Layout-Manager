@@ -2,9 +2,10 @@
 
 #include "../Util/Geometry/SRect.h"
 #include "../Util/CCustomData.h"
-
+#include "../Util/Container/CIndexedChild.h"
 
 using namespace ipgdlib::util;
+using namespace ipgdlib::util::container;
 
 namespace ipgdlib
 {
@@ -13,6 +14,7 @@ namespace ipgdlib
 
         template <typename T>
         class CAbsBasePlaceHolder :
+            public CIndexedChild,
             virtual public ICustomData
         {
         public:
@@ -33,11 +35,6 @@ namespace ipgdlib
                 return this->m_Rect;
             }
 
-            void changeRect(Rect r)
-            {
-                this->onChangeRect(this->m_Rect, std::move(r));
-            }
-
             bool hasParent() const
             {
                 return this->m_Parent != nullptr;
@@ -46,6 +43,11 @@ namespace ipgdlib
             CAbsBaseManager* const& getParent() const
             {
                 return this->m_Parent;
+            }
+
+            void changeRect(Rect r)
+            {
+                this->onChangeRect(this->m_Rect, std::move(r));
             }
 
         protected:
