@@ -15,7 +15,8 @@ namespace ipgdlib
 		>
 		class CLMPadder :
 			public CAbsManagerStatic<T,1,TCustomData, void>,
-			public ipgdlib::os::CAbsDragableBase<T,false>
+			public ipgdlib::os::CAbsDragableBase<T,false>,
+			public CAbsSizeAutonomy<T,eSizeAutonomy::None>
 		{
 		public:
 			using Rect = typename CAbsBasePlaceHolder<T>::Rect;

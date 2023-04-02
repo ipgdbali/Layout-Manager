@@ -21,10 +21,10 @@ namespace LayoutManagerTest
 				Assert::AreEqual<bool>(pPlaceHolder->hasCustomData(), false);
 				delete pPlaceHolder;
 
-				pPlaceHolder = new CPlaceHolder<int, int>(10);
+				pPlaceHolder = new CPlaceHolder<int, eSizeAutonomy::None, int>(10);
 				Assert::AreEqual<bool>(pPlaceHolder->hasCustomData(), true);
 				Assert::AreEqual<int>(
-					dynamic_cast<CPlaceHolder<int,int>*>(pPlaceHolder)->getCustomData(), 
+					dynamic_cast<CPlaceHolder<int, eSizeAutonomy::None, int>*>(pPlaceHolder)->getCustomData(),
 					10
 				);
 				delete pPlaceHolder;
@@ -32,7 +32,7 @@ namespace LayoutManagerTest
 
 			TEST_METHOD(class_CLMPadder)
 			{
-				CLMPadder<int> root({ 5,5,5,5 }, new CPlaceHolder<int,int>(10));
+				CLMPadder<int> root({ 5,5,5,5 }, new CPlaceHolder<int, eSizeAutonomy::None, int>(10));
 
 				root.changeRect({ 0,0,99,99 });
 				Assert::AreEqual<ipgdlib::geometry::SRect<int>>
@@ -42,7 +42,7 @@ namespace LayoutManagerTest
 				Assert::AreEqual<size_t>(root.getChildIndexFromPoint({ 20,20 }), 0);
 				Assert::AreEqual<bool>(root.getChildPlaceHolder(0)->hasCustomData(),true);
 				Assert::AreEqual<int>(
-					dynamic_cast<CPlaceHolder<int,int>*>(
+					dynamic_cast<CPlaceHolder<int, eSizeAutonomy::None, int>*>(
 						root.getChildPlaceHolder(0)
 					)->getCustomData(),
 					10);

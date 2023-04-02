@@ -9,7 +9,7 @@ namespace ipgdlib
 		class ISizeAutonomy
 		{
 			virtual ~ISizeAutonomy() {}
-			eSizeAutonomy getSizeAutonomy() const = 0;
+			virtual eSizeAutonomy getSizeAutonomy() const = 0;
 		};
 
 	}

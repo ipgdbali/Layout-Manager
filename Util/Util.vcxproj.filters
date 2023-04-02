@@ -147,5 +147,11 @@
     <ClInclude Include="CAbsSizeAutonomy.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="IAutonomyParent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CAbsAutonomyParent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

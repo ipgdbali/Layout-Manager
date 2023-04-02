@@ -4,17 +4,26 @@
 #include "iface/IAffectedAxis.h"
 #include "Container/CIndexedChild.h"
 #include "Geometry/SSize.h"
+#include "IAutonomyParent.h"
+#include "CAbsAutonomyParent.h"
 
 namespace ipgdlib
 {
 	namespace layout
 	{
 
-		using namespace ipgdlib::container;
-
 		template <typename T,eSizeAutonomy autonomy>
-		class CAbsSizeAutonomy {
-			eSizeAutonomy getSizeAutonomy() override
+		class CAbsSizeAutonomy {};
+
+		template <typename T>
+		class CAbsSizeAutonomy<T, eSizeAutonomy::None> :
+			virtual public ISizeAutonomy
+		{
+			~CAbsSizeAutonomy() override
+			{
+			}
+
+			eSizeAutonomy getSizeAutonomy() const override
 			{
 				return eSizeAutonomy::None;
 			}
@@ -23,7 +32,7 @@ namespace ipgdlib
 		template <typename T>
 		class CAbsSizeAutonomy<T,eSizeAutonomy::Width> :
 			virtual public CIndexedChild,
-			public ISizeAutonomy
+			virtual public ISizeAutonomy
 		{
 			public:
 
@@ -32,14 +41,14 @@ namespace ipgdlib
 					return eSizeAutonomy::Width;
 				}
 
-				virtual IAutonomyParent<eAffectedAxis::Horizontal>* getAutonomyParent() const = 0;
-
+				virtual CAbsAutonomyParent<T, eAffectedAxis::Horizontal>* getAutonomyParent() const = 0;
+				
 				virtual T getWidth() const = 0;
 				
 				virtual bool setWidth(T width)
 				{
-					return this->getAutonomyParent()->onChildSizeChanged(
-						this->getIndex(),
+					return this->getAutonomyParent()->onChildSizeChangedPermission(
+						this->getChildIndex(),
 						this->getWidth(),
 						width
 					);
@@ -48,8 +57,8 @@ namespace ipgdlib
 
 		template <typename T>
 		class CAbsSizeAutonomy<T, eSizeAutonomy::Height> :
-			public CIndexedChild,
-			public ISizeAutonomy
+			virtual public CIndexedChild,
+			virtual public ISizeAutonomy
 		{
 		public:
 
@@ -63,7 +72,7 @@ namespace ipgdlib
 			virtual T getHeight() const = 0;
 			virtual bool setHeight(T height)
 			{
-				return this->getAutonomyParent()->onChildSizeChanged(
+				return this->getAutonomyParent()->onChildSizeChangedPermission(
 					this->getChildIndex(),
 					this->getHeight(),
 					height
@@ -73,7 +82,7 @@ namespace ipgdlib
 
 		template <typename T>
 		class CAbsSizeAutonomy<T, eSizeAutonomy::Both> :
-			public CIndexedChild,
+			virtual public CIndexedChild,
 			public ISizeAutonomy
 		{
 		public:
@@ -89,7 +98,7 @@ namespace ipgdlib
 			virtual Size getSize() const = 0;
 			virtual bool setSize(Size size)
 			{
-				return this->getAutonomyParent()->onChildSizeChanged(
+				return this->getAutonomyParent()->onChildSizeChangedPermission(
 					this->getChildIndex(),
 					this->getSize(),
 					size

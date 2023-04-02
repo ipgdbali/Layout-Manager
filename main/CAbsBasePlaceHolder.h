@@ -3,6 +3,7 @@
 #include "../Util/Geometry/SRect.h"
 #include "../Util/CCustomData.h"
 #include "../Util/Container/CIndexedChild.h"
+#include "../Util/ISizeAutonomy.h"
 
 using namespace ipgdlib::util;
 using namespace ipgdlib::util::container;
@@ -15,6 +16,7 @@ namespace ipgdlib
         template <typename T>
         class CAbsBasePlaceHolder :
             public CIndexedChild,
+            virtual public ISizeAutonomy,
             virtual public ICustomData
         {
         public:

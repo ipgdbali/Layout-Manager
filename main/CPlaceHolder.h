@@ -1,6 +1,7 @@
 #pragma once
 
 #include "CAbsBasePlaceHolder.h"
+#include "../Util/CAbsSizeAutonomy.h"
 
 namespace ipgdlib
 {
@@ -9,11 +10,13 @@ namespace ipgdlib
 
         template <
             typename T,
+            eSizeAutonomy sizeAutonomy = eSizeAutonomy::None,
             typename TCustomData = void
         >
         class CPlaceHolder : 
             public CAbsBasePlaceHolder<T>,
-            public CCustomData<TCustomData>
+            public CCustomData<TCustomData>,
+            public CAbsSizeAutonomy<T,sizeAutonomy>
         {
 
             public:
