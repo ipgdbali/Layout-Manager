@@ -1,20 +1,20 @@
 #pragma once
 
 #include "../main/CPlaceHolder.h"
-#include "../GUI/CMouseHandler.h"
+#include "../Util/Mouse/CMouseHandler.h"
 #include <Windows.h>
 
 using namespace ipgdlib::layout;
 using namespace ipgdlib::os;
 
-void draw(CAbsBasePlaceHolder<int>* pPlaceHolder, HDC hdc)
+void draw(HDC hdc, CAbsBasePlaceHolder<int>* pPlaceHolder)
 {
 	if (pPlaceHolder->isManager())
 	{
 		CAbsBasePlaceHolder<int>::CAbsBaseManager* manager =
 			dynamic_cast<CAbsBasePlaceHolder<int>::CAbsBaseManager*>(pPlaceHolder);
 		for (int li = 0; li < manager->getChildCount(); li++)
-			draw(manager->getChildPlaceHolder(li), hdc);
+			draw(hdc,manager->getChildPlaceHolder(li));
 	}
 	else
 	{
@@ -126,10 +126,12 @@ public:
 						tmp->getRect().right,
 						tmp->getRect().bottom 
 					};
+
 					HDC hdc = this->getDragItemRef().hdc;
 					FillRect(hdc, &r, this->m_Background);
-					draw(tmp, hdc);
+					draw(hdc,tmp);
 					ReleaseDC(this->m_hWnd, this->getDragItemRef().hdc);
+					this->getDragItemRef().clear();
 				}
 			}
 			else
@@ -163,7 +165,7 @@ protected:
 		CAbsBasePlaceHolder<T>* tmp = m_pRoot;
 		bool bFoundPlaceHolder = false;
 
-		while(tmp->isPointInside(pos))
+		while(tmp->getRect().isPointInside(pos))
 		{
 			if (tmp->isManager())
 			{
@@ -171,7 +173,7 @@ protected:
 				typename CAbsBasePlaceHolder<T>::CAbsBaseManager* tmp2 = dynamic_cast<typename CAbsBasePlaceHolder<T>::CAbsBaseManager*>(tmp);
 				for (size_t li = 0; li < tmp2->getChildCount(); li++)
 				{
-					if (tmp2->getChildPlaceHolder(li)->isPointInside(pos))
+					if (tmp2->getChildPlaceHolder(li)->getRect().isPointInside(pos))
 					{
 						tmp = tmp2->getChildPlaceHolder(li);
 						bFoundPlaceHolder = true;
@@ -191,6 +193,8 @@ protected:
 	}
 
 private:
+
+
 	typename CAbsBasePlaceHolder<T>::CAbsBaseManager* m_pRoot;
 	HWND m_hWnd;
 	HBRUSH m_Background;

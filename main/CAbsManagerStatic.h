@@ -28,14 +28,15 @@ namespace ipgdlib
                     bool 
                 >::type = true
             >
-            CAbsManagerStatic(std::array<child_item_type, n> && childs) :
+            CAbsManagerStatic(std::array<child_item_type, n> childs) :
                 CAbsManager<T, TCustomData, TChildItem>(), 
                 m_Childs(std::move(childs))
             {
                 for (size_t li = 0; li < n; li++)
-                    CAbsManager<T, TCustomData, TChildItem>::setChildParent(
-                        this->getChildPlaceHolder(li)
-                    );
+                {
+                    this->setChildIndex(*this->getChildPlaceHolder(li), li);
+                    this->setChildParent(this->getChildPlaceHolder(li));
+                }
             }
 
             template <
@@ -46,16 +47,22 @@ namespace ipgdlib
                 >::type = true
             >
             CAbsManagerStatic(
-                _TCustomData && customData, 
-                std::array<child_item_type, n> && childs
+                _TCustomData customData, 
+                std::array<child_item_type, n> childs
             ) : 
                 CAbsManager<T, TCustomData, TChildItem>(std::move(customData)), 
                 m_Childs(std::move(childs))
             {
                 for (size_t li = 0; li < n; li++)
-                    CAbsManager<T, TCustomData, TChildItem>::setChildParent(
-                        this->getChildPlaceHolder(li)
-                    );
+                {
+                    this->setChildIndex(*this->getChildPlaceHolder(li), li);
+                    this->setChildParent(this->getChildPlaceHolder(li));
+                }
+            }
+
+            eContainerKind getContainerKind() const override
+            {
+                return eContainerKind::Static;
             }
 
             size_t getChildCount() const override
@@ -69,6 +76,11 @@ namespace ipgdlib
             }
 
         protected:
+
+            std::array<child_item_type, n> &getContainer()
+            {
+                return this->m_Childs;
+            }
 
             child_item_type &getChildRef(size_t index) override
             {

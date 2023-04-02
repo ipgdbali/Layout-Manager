@@ -47,7 +47,6 @@ namespace ipgdlib
 				return { this->x / div,this->y / div };
 			}
 
-
 			template <typename U = T>
 			U hypotenuse() const
 			{

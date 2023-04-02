@@ -1,7 +1,12 @@
 #pragma once
 
-#include "./../Geometry/SRect.h"
+#include "../Util/Geometry/SRect.h"
 #include "../Util/CCustomData.h"
+#include "../Util/Container/CIndexedChild.h"
+#include "../Util/ISizeAutonomy.h"
+
+using namespace ipgdlib::util;
+using namespace ipgdlib::util::container;
 
 namespace ipgdlib
 {
@@ -10,6 +15,8 @@ namespace ipgdlib
 
         template <typename T>
         class CAbsBasePlaceHolder :
+            public CIndexedChild,
+            virtual public ISizeAutonomy,
             virtual public ICustomData
         {
         public:
@@ -25,19 +32,9 @@ namespace ipgdlib
 
             virtual bool isManager() const = 0;
 
-            bool isPointInside(const Point& p) const
-            {
-                return this->m_Rect.isPointInRect(p);
-            }
-
             const Rect& getRect() const
             {
                 return this->m_Rect;
-            }
-
-            void changeRect(Rect r)
-            {
-                this->onChangeRect(this->m_Rect, std::move(r));
             }
 
             bool hasParent() const
@@ -50,8 +47,13 @@ namespace ipgdlib
                 return this->m_Parent;
             }
 
+            void changeRect(Rect r)
+            {
+                this->onChangeRect(this->m_Rect, std::move(r));
+            }
+
         protected:
-            virtual void onChangeRect(Rect& r, Rect && nr)
+            virtual void onChangeRect(Rect & r, Rect && nr)
             {
                 r = std::move(nr);
             }

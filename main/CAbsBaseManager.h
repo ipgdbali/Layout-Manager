@@ -2,6 +2,9 @@
 
 #include "CAbsBasePlaceHolder.h"
 #include "../Util/CAbsAutoReCalculate.h"
+#include "../Util/Container/IContainerKind.h"
+#include "../Util/iface/IAffectedAxis.h"
+#include "../Util/Mouse/IDragable.h"
 #include <vector>
 
 namespace ipgdlib
@@ -9,14 +12,16 @@ namespace ipgdlib
 	namespace layout
 	{
 
-        using namespace ipgdlib::util;
-
-        enum class eAffectedAxis { Horizontal, Vertical, Both };
+        using namespace ipgdlib::container;
 
         template <typename T>
         class CAbsBasePlaceHolder<T>::CAbsBaseManager :
             public CAbsBasePlaceHolder<T>,
-            public CAbsAutoReCalculate
+            public CAbsAutoReCalculate,
+            public CIndexedChild::CIndexedChildMutator,
+            virtual public ipgdlib::os::IDragable,
+            public IContainerKind,
+            public IAffectedAxis
         {
 
         public:
@@ -25,11 +30,10 @@ namespace ipgdlib
 
             CAbsBaseManager() :
                 CAbsBasePlaceHolder<T>(), 
-                CAbsAutoReCalculate()
+                CAbsAutoReCalculate(),
+                CIndexedChild::CIndexedChildMutator()
             {
             }
-
-            virtual eAffectedAxis getAffectedAxis() const = 0;
 
             bool isManager() const override final
             {
@@ -39,7 +43,7 @@ namespace ipgdlib
             size_t getChildIndexFromPoint(const Point& p) const
             {
                 for (size_t li = 0; li < this->getChildCount(); li++)
-                    if (this->getChildPlaceHolder(li)->getRect().isPointInRect(p))
+                    if (this->getChildPlaceHolder(li)->getRect().isPointInside(p))
                         return li;
 
                 return (size_t)-1;
@@ -49,10 +53,11 @@ namespace ipgdlib
 
             virtual CAbsBasePlaceHolder<T>* const & getChildPlaceHolder(size_t index) const = 0;
 
-            virtual void setChildPlaceHolder(size_t index, CAbsBasePlaceHolder<T>* const pChildPlaceHolder)
-            {
+            virtual void setChildPlaceHolder(size_t index, CAbsBasePlaceHolder<T>* const pChildPlaceHolder){
+
                 if (pChildPlaceHolder)
                 {
+
                     CAbsBasePlaceHolder<T>* &pInternal = this->getChildPlaceHolderRef(index);
                     if (pInternal != nullptr)
                     {
@@ -61,12 +66,8 @@ namespace ipgdlib
                     }
                     pInternal = pChildPlaceHolder;
                     setChildParent(pInternal);
+                
                 }
-            }
-
-            bool setChildPlaceHolders(std::vector< CAbsBasePlaceHolder<T>* > && pChildPlaceHolders)
-            {
-                throw "Not Implemented Yet";
             }
 
         protected:

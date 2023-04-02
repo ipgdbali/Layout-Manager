@@ -1,5 +1,5 @@
-#include "../GUI/CWndApp.h"
-#include "../GUI/CWndClass.h"
+#include "../Util/Win32/CWndApp.h"
+#include "../Util/Win32/CWndClass.h"
 #include "../main/CPlaceHolder.h"
 #include "../main/CAbsManager.h"
 #include "../main/CLMPadder.h"
@@ -63,9 +63,9 @@ static LRESULT Wndproc(
 												new CPanelBar<int>(),
 												new CLMDividerVert<int>(5,
 													{
-														{1,new CPanelBar<int>()},
-														{2,new CPanelTool<int>()},
-														{1,new CPanelBar<int>()}
+														{1,new CPanelTool<int>()},
+														{2,new CPanelBar<int>()},
+														{1,new CPanelTool<int>()}
 													})
 											})
 									})
@@ -109,7 +109,7 @@ static LRESULT Wndproc(
 		{
 			PAINTSTRUCT ps;
 			BeginPaint(hWnd, &ps);
-			draw(pRoot, ps.hdc);
+			draw(ps.hdc,pRoot);
 			EndPaint(hWnd, &ps);
 			return 0;
 		}break;

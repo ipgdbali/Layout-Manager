@@ -18,6 +18,35 @@ namespace ipgdlib
 			T right;
 			T bottom;
 
+
+			SRect(const SRect<T>& r) :
+				SRect(r.left, r.top, r.right, r.bottom)
+			{
+			}
+
+			SRect<T>& operator = (const SRect& r)
+			{
+				this->left = r.left;
+				this->top = r.top;
+				this->right = r.right;
+				this->bottom = r.bottom;
+				return *this;
+			}
+
+			SRect(SRect<T>&& r) :
+				SRect(std::move(r.left), std::move(r.top), std::move(r.right), std::move(r.bottom))
+			{
+			}
+
+			SRect<T>& operator = (SRect&& r)
+			{
+				this->left = std::move(r.left);
+				this->top = std::move(r.top);
+				this->right = std::move(r.right);
+				this->bottom = std::move(r.bottom);
+				return *this;
+			}
+
 			SRect(const T& all) :
 				left(all), top(all), right(all), bottom(all)
 			{
@@ -33,27 +62,13 @@ namespace ipgdlib
 			{
 			}
 
-			SRect(const SRect<T>& r) :
-				SRect(r.left, r.top, r.right, r.bottom)
-			{
-			}
-
-			SRect(SRect<T> && r) :
-				SRect(std::move(r.left), std::move(r.top), std::move(r.right), std::move(r.bottom))
-			{
-			}
-
-			SRect<T>& operator = (SRect&& r)
-			{
-				this->left		= std::move(r.left);
-				this->top		= std::move(r.top);
-				this->right		= std::move(r.right);
-				this->bottom	= std::move(r.bottom);
-				return *this;
-			}
-
 			template <typename U>
 			SRect(const SRect<U>& ref) :
+				left(T(ref.left)), top(T(ref.top)), right(T(ref.right)), bottom(T(ref.bottom))
+			{
+			}
+
+			SRect(const RECT& ref) :
 				left(T(ref.left)), top(T(ref.top)), right(T(ref.right)), bottom(T(ref.bottom))
 			{
 			}
@@ -69,8 +84,7 @@ namespace ipgdlib
 				return r;
 			}
 
-
-			bool isPointInRect(const SPoint<T> &p) const
+			bool isPointInside(const SPoint<T> &p) const
 			{
 				if (this->left <= p.x && p.x <= this->right && this->top <= p.y && p.y <= this->bottom)
 					return true;
@@ -93,12 +107,12 @@ namespace ipgdlib
 				return { this->centerHorz(),this->centerVert() };
 			}
 
-			SPoint<T> horz() const
+			SRange<T> horz() const
 			{
 				return { this->left,this->right };
 			}
 
-			SPoint<T> vert() const
+			SRange<T> vert() const
 			{
 				return { this->top,this->bottom };
 			}
@@ -123,12 +137,22 @@ namespace ipgdlib
 				return { left + r.left,top + r.top,right - r.right,bottom - r.bottom };
 			}
 
-			SRect<T> horzRePosition(const SRange<T>& p) const
+			SRect<T> horzRePositionLeft(const SRange<T>& p) const
 			{
 				return { this->left + p.a,this->top,this->left + p.b,this->bottom };
 			}
 
-			SRect<T> vertRePosition(const SRange<T>& p) const
+			SRect<T> vertRePositionTop(const SRange<T>& p) const
+			{
+				return { this->left,this->top + p.a,this->right,this->top + p.b };
+			}
+
+			SRect<T> horzRePositionRight(const SRange<T>& p) const
+			{
+				return { this->right - p.a,this->top,this->right - p.b,this->bottom };
+			}
+
+			SRect<T> vertRePositionBottom(const SRange<T>& p) const
 			{
 				return { this->left,this->top + p.a,this->right,this->top + p.b };
 			}
@@ -147,7 +171,6 @@ namespace ipgdlib
 			{
 				return { this->left,vert.a,this->right,vert.b};
 			}
-
 
 			SRect<T> horzMoveAdd(const T& delta)
 			{
@@ -169,14 +192,14 @@ namespace ipgdlib
 				return { this->left,this->top - delta,this->right,this->bottom - delta };
 			}
 
-			SRect<T> moveAdd(const SPoint<T>& delta) const
+			SRect<T> moveAdd(const SSize<T>& delta) const
 			{
-				return { this->left + delta.x,this->top + delta.y,this->right + delta.x,this->bottom + delta.y };
+				return { this->left + delta.width,this->top + delta.height,this->right + delta.width,this->bottom + delta.height };
 			}
 
-			SRect<T> moveSub(const SPoint<T>& delta) const
+			SRect<T> moveSub(const SSize<T>& delta) const
 			{
-				return { this->left - delta.x,this->top - delta.y,this->right - delta.x,this->bottom - delta.y };
+				return { this->left - delta.width,this->top - delta.height,this->right - delta.width,this->bottom - delta.height };
 			}
 
 			SRect<T> makeLeft(const T& l) const
@@ -217,6 +240,15 @@ namespace ipgdlib
 				return { this->left + delta.a,this->top + delta.b,this->right + delta.a,this->bottom + delta.b};
 			}
 
+			SRect<T> unionWith(const SRect<T>& r) const
+			{
+				return {
+					(this->left < r.left) ? this->left : r.left,
+					(this->top < r.top) ? this->top : r.top,
+					(this->right < r.right) ? this->right : r.right ,
+					(this->bottom < r.bottom) ? this->bottom : r.bottom
+				};
+			}
 		};
 
 		template <typename T>

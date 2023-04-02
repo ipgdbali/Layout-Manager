@@ -15,13 +15,13 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ISizeable.h">
+    <ClInclude Include="iface\ISizeable.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="IReCalculate.h">
+    <ClInclude Include="iface\IReCalculate.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="IAutoReCalculate.h">
+    <ClInclude Include="iface\IAutoReCalculate.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="CAbsAutoReCalculate.h">
@@ -34,6 +34,123 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="CCustomData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Container\IContainerIndexed.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Container\CContainerIndexedStatic.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Container\CContainerIndexedDynamic.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="iface\INullable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CNullableT.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Container\IContainerKind.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="iface\ICustomData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Container\IContainer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="iface\IAffectedAxis.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Container\IContainerT.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Geometry\SPoint.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Geometry\SRange.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Geometry\SRect.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Geometry\SSize.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Win32\CWindow.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Win32\CWndApp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Win32\CWndClass.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Mouse\CAbsDragableBase.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Mouse\CAbsDragableDynamic.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Mouse\CAbsDragableStatic.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Mouse\CDragManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Mouse\CMouseHandler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Mouse\IDragable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Region\CAbsRegion.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Region\CAbsRegionOperation.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Region\CAbsRegionOperationBinary.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Region\CAbsRegionOperationNot.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Region\CAbsRegionOperationUnary.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Region\CRegionOperationIntersection.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Region\CRegionOperationSubtraction.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Region\CRegionOperationUnion.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Region\CRegionRectangle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Container\IContainerIndexedOrderable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Container\CIndexedChild.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Mouse\CAbsDragable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ISizeAutonomy.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CAbsSizeAutonomy.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="IAutonomyParent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CAbsAutonomyParent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

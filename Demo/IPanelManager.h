@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../Geometry/SRect.h"
+#include "../Util/Geometry/SRect.h"
 
 template <typename T>
 struct IPanelManager

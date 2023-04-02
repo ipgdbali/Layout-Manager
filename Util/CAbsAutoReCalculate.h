@@ -1,6 +1,6 @@
 #pragma once
 
-#include "IAutoReCalculate.h"
+#include "iface/IAutoReCalculate.h"
 
 namespace ipgdlib
 {

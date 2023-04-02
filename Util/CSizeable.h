@@ -1,6 +1,6 @@
 #pragma once
 
-#include "ISizeable.h"
+#include "iface/ISizeable.h"
 
 namespace ipgdlib
 {

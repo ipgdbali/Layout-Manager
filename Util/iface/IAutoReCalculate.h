@@ -7,10 +7,10 @@ namespace ipgdlib
 	namespace util
 	{
 
-		struct IAutoReCalculate :
+		class IAutoReCalculate :
 			virtual public IReCalculate
 		{
-
+		public:
 			virtual bool getAutoReCalculate() const = 0;
 			virtual void setAutoReCalculate(bool bAutoReCalculate) = 0;
 

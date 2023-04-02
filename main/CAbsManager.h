@@ -41,14 +41,14 @@ namespace ipgdlib
                         bool 
                     >::type = true
                 >
-                CAbsManagerTS(_TCustomData && customData) :
+                CAbsManagerTS(_TCustomData customData) :
                     CAbsBasePlaceHolder<T>::CAbsBaseManager(), 
                     CCustomData<TCustomData>(std::move(customData))
                 {
                 }
 
                 virtual child_item_type const &getChild(size_t index) const = 0;
-                virtual void setChild(size_t index, child_item_type && child) = 0;
+                virtual void setChild(size_t index, child_item_type child) = 0;
 
             protected:
                 virtual child_item_type &getChildRef(size_t index) = 0;
@@ -89,7 +89,7 @@ namespace ipgdlib
                     !std::is_same<_TCustomData, void>::value, 
                     bool >::type = true
             >
-            CAbsManager(_TCustomData && customData) : 
+            CAbsManager(_TCustomData customData) : 
                 CAbsManagerTS<
                     T,
                     TCustomData,
@@ -108,15 +108,15 @@ namespace ipgdlib
                 return this->getChild(index).first;
             }
 
-            void setChild(size_t index,child_item_type && child) override
-            {
-                this->setChildPlaceHolder(index, child.second);
-                this->setChildItem(index, std::move(child.first));
-            }
-
-            virtual void setChildItem(size_t index,TChildItem && item)
+            virtual void setChildItem(size_t index, TChildItem item)
             {
                 this->getChildItemRef(index) = std::move(item);
+            }
+
+            void setChild(size_t index,child_item_type child) override
+            {
+                this->setChildPlaceHolder(index, std::move(child.second));
+                this->setChildItem(index, std::move(child.first));
             }
 
         protected:
@@ -158,19 +158,7 @@ namespace ipgdlib
                         bool 
                     >::type = true
                 >
-                CAbsManager(const _TCustomData& customData)
-                    : CAbsManagerTS<T, TCustomData, child_item_type>(customData)
-                {
-                }
-
-                template <
-                    typename _TCustomData = TCustomData,
-                    typename std::enable_if< 
-                        !std::is_same<_TCustomData, void>::value, 
-                        bool 
-                    >::type = true
-                >
-                CAbsManager(_TCustomData && customData)
+                CAbsManager(_TCustomData customData)
                     : CAbsManagerTS<T, TCustomData, child_item_type>(std::move(customData))
                 {
                 }
@@ -180,7 +168,7 @@ namespace ipgdlib
                     return this->getChild(index);
                 }
 
-                void setChild(size_t index, child_item_type && child) override
+                void setChild(size_t index, child_item_type child) override
                 {
                     this->setChildPlaceHolder(index, std::move(child));
                 }

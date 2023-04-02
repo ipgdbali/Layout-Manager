@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../Util/CSizeable.h"
-#include "../Util/IAutoReCalculate.h"
+#include "../Util/iface/IAutoReCalculate.h"
 
 
 namespace ipgdlib
